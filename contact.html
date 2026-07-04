@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact · Dexin Advanced Ceramics</title>
+<meta name="description" content="Contact Suzhou Dexin Advanced Ceramics — address, phone, WhatsApp, WeChat and inquiry form.">
+<link rel="icon" type="image/jpeg" href="assets/img/site/logo_emblem.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header id="site-header" data-variant="solid"></header>
+
+<main>
+<!-- ================= PAGE HERO ================= -->
+<section class="page-hero" style="background:linear-gradient(rgba(7,20,41,.80),rgba(9,26,52,.92)),url('assets/img/site/factory_building.jpg') center/cover">
+  <div class="container inner">
+    <div class="crumbs">
+      <a href="index.html"><span data-en>Home</span><span data-zh>首页</span></a>
+      <span>/</span>
+      <span data-en>Contact</span><span data-zh>联系我们</span>
+    </div>
+    <span class="eyebrow"><span data-en>Get in touch</span><span data-zh>联系我们</span></span>
+    <h1><span data-en>Let's talk about your requirements</span><span data-zh>欢迎洽谈您的需求</span></h1>
+    <p><span data-en>Send us your specifications, drawings or application details — our sales and technical team typically reply within one business day.</span><span data-zh>请发送您的规格、图纸或应用细节——我们的销售与技术团队通常在一个工作日内回复。</span></p>
+  </div>
+</section>
+
+<!-- ================= CONTACT + FORM ================= -->
+<section class="section">
+  <div class="container">
+    <div class="pd-grid">
+
+      <!-- LEFT: contact details -->
+      <div class="reveal">
+        <div style="border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;background:#fff">
+          <span class="eyebrow"><span data-en>Head office & factory</span><span data-zh>总部与工厂</span></span>
+          <h2 style="font-size:clamp(22px,2.4vw,28px);margin:12px 0 22px">
+            <span data-en id="coEn"></span><span data-zh id="coZh"></span>
+          </h2>
+          <ul class="foot-contact" id="contactList" style="display:grid;gap:4px"></ul>
+
+          <div style="margin-top:26px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;display:flex;gap:20px;align-items:center">
+            <div style="flex:0 0 auto;width:120px;height:120px;background:#fff;border:1px solid var(--line);border-radius:14px;display:grid;place-items:center;color:var(--molten)" id="wechatBox"></div>
+            <div>
+              <strong style="font-family:var(--display);display:block;font-size:16px"><span data-en>Scan to chat on WeChat</span><span data-zh>微信扫码沟通</span></strong>
+              <p style="color:var(--muted);font-size:14px;margin-top:6px"><span data-en>Add our sales team for quick quotes, samples and order updates.</span><span data-zh>添加我们的销售团队，快速获取报价、样品与订单进展。</span></p>
+            </div>
+          </div>
+
+          <a class="btn btn-primary" id="waBtn" href="#" target="_blank" rel="noopener" style="margin-top:18px;width:100%;justify-content:center">
+            <span data-en>Chat on WhatsApp</span><span data-zh>WhatsApp 咨询</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: inquiry form -->
+      <div class="reveal d1">
+        <div style="border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;background:#fff">
+          <span class="eyebrow"><span data-en>Send an inquiry</span><span data-zh>发送询盘</span></span>
+          <h2 style="font-size:clamp(22px,2.4vw,28px);margin:12px 0 4px"><span data-en>Tell us what you need</span><span data-zh>告诉我们您的需求</span></h2>
+          <p class="lead" style="font-size:15px;margin-bottom:18px"><span data-en>Fields marked * are required.</span><span data-zh>带 * 的字段为必填项。</span></p>
+
+          <form class="dx-form" id="inquiryForm" novalidate style="padding:0;gap:14px">
+            <div class="field row">
+              <div class="field">
+                <label><span data-en>Name</span><span data-zh>姓名</span> <span class="req">*</span></label>
+                <input id="f-name" type="text" required data-en-ph="Your name" data-zh-ph="您的姓名">
+              </div>
+              <div class="field">
+                <label><span data-en>Company</span><span data-zh>公司</span></label>
+                <input id="f-company" type="text" data-en-ph="Company name" data-zh-ph="公司名称">
+              </div>
+            </div>
+            <div class="field row">
+              <div class="field">
+                <label><span data-en>Email</span><span data-zh>邮箱</span> <span class="req">*</span></label>
+                <input id="f-email" type="email" required data-en-ph="you@company.com" data-zh-ph="you@company.com">
+              </div>
+              <div class="field">
+                <label><span data-en>Phone</span><span data-zh>电话</span></label>
+                <input id="f-phone" type="tel" data-en-ph="Phone / WhatsApp" data-zh-ph="电话 / 微信">
+              </div>
+            </div>
+            <div class="field">
+              <label><span data-en>Product interest</span><span data-zh>意向产品</span></label>
+              <input id="f-product" type="text" data-en-ph="e.g. SiC foam filter, insulation board" data-zh-ph="例如：碳化硅泡沫过滤器、隔热板">
+            </div>
+            <div class="field">
+              <label><span data-en>Message</span><span data-zh>留言</span></label>
+              <textarea id="f-message" data-en-ph="Sizes, quantities, application, target temperature…" data-zh-ph="规格、数量、应用场景、使用温度……"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="justify-content:center">
+              <span data-en>Send inquiry</span><span data-zh>发送询盘</span>
+            </button>
+            <div class="form-note">
+              <span><span data-en>Demo form — not connected. Wire it to email or a form service (Formspree / Web3Forms) to receive submissions.</span><span data-zh>演示表单（未连接）。可接入邮箱或表单服务（Formspree / Web3Forms）以接收提交内容。</span></span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIND US ================= -->
+<section class="section soft tight">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow"><span data-en>Find us</span><span data-zh>工厂位置</span></span>
+      <h2 style="font-size:clamp(24px,2.8vw,34px)"><span data-en>Where to find Dexin</span><span data-zh>如何找到德鑫</span></h2>
+    </div>
+    <div class="reveal" id="mapCard" style="min-height:300px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-lg);display:grid;place-items:center;text-align:center;padding:48px 24px">
+      <div>
+        <div style="color:var(--molten);margin:0 auto 12px;width:54px;height:54px" id="mapPin"></div>
+        <p style="font-family:var(--display);font-weight:600;font-size:18px;max-width:560px;margin:0 auto">
+          <span data-en id="addrEn"></span><span data-zh id="addrZh"></span>
+        </p>
+        <p style="color:var(--muted);margin-top:8px"><span data-en>Suzhou High-tech Zone, Jiangsu, China</span><span data-zh>中国江苏苏州高新区</span></p>
+        <a class="btn btn-ghost" href="https://www.openstreetmap.org/search?query=Suzhou%20High-tech%20Zone" target="_blank" rel="noopener" style="margin-top:22px">
+          <span data-en>Open in maps</span><span data-zh>在地图中打开</span>
+        </a>
+        <p class="stat-note" style="margin-top:18px"><span data-en>* Map placeholder for this demo — embed a live map for production.</span><span data-zh>* 本演示为地图占位——正式上线请嵌入实时地图。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="assets/js/data.js"></script>
+<script>
+window.DXPAGE = function(){
+  const U = window.DXUI, D = window.DX, c = D.contact;
+
+  // company name
+  document.getElementById('coEn').textContent = D.company.en;
+  document.getElementById('coZh').textContent = D.company.zh;
+
+  // contact details list
+  const rows = [
+    {ic:'pin',   en:`Head office: ${c.addr_en}`, zh:`总部：${c.addr_zh}`},
+    {ic:'pin',   en:`Factory: ${c.factory_en}`, zh:`工厂：${c.factory_zh}`},
+    {ic:'phone', en:`Tel: ${c.tel}`, zh:`电话：${c.tel}`},
+    {ic:'clock', en:`Day & night hotline: ${c.hotline}`, zh:`日夜服务热线：${c.hotline}`},
+    {ic:'whatsapp', en:`WhatsApp: ${c.whatsapp}`, zh:`WhatsApp：${c.whatsapp}`, href:c.whatsapp_link},
+    {ic:'fax',   en:`Fax: ${c.fax}`, zh:`传真：${c.fax}`},
+    {ic:'mail',  en:`Email: ${c.email}`, zh:`邮箱：${c.email}`},
+    {ic:'globe', en:`Web: ${c.web}`, zh:`网址：${c.web}`, href:`http://${c.web}`},
+  ];
+  document.getElementById('contactList').innerHTML = rows.map(r=>{
+    const inner = `${U.svg(r.ic)}<span><span data-en>${r.en}</span><span data-zh>${r.zh}</span></span>`;
+    return r.href
+      ? `<li><a href="${r.href}" target="_blank" rel="noopener" style="display:flex;gap:12px;color:inherit;align-items:flex-start">${inner}</a></li>`
+      : `<li>${inner}</li>`;
+  }).join('');
+
+  // wechat icon ~120px box
+  document.getElementById('wechatBox').innerHTML = U.svg('wechat',1.2).replace('<svg ', '<svg style="width:88px;height:88px" ');
+
+  // whatsapp quick-contact button
+  const wa = document.getElementById('waBtn');
+  if(wa){ wa.href = c.whatsapp_link; wa.insertAdjacentHTML('afterbegin', U.svg('whatsapp')); }
+
+  // map pin + address
+  document.getElementById('mapPin').innerHTML = U.svg('pin',1.4).replace('<svg ', '<svg style="width:54px;height:54px" ');
+  document.getElementById('addrEn').textContent = c.addr_en;
+  document.getElementById('addrZh').textContent = c.addr_zh;
+
+  // form submit -> success state
+  const form = document.getElementById('inquiryForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    form.innerHTML = `
+      <div class="form-ok show" style="padding:18px 0">
+        <div class="ck">${U.svg('check',2.4)}</div>
+        <h3><span data-en>Thank you</span><span data-zh>感谢您的询盘</span></h3>
+        <p style="color:var(--muted);margin-top:8px">
+          <span data-en>Thank you — we'll reply within one business day.</span>
+          <span data-zh>感谢您的询盘，我们将在一个工作日内回复。</span>
+        </p>
+      </div>`;
+    U.applyLang(form);
+  });
+
+  U.applyLang(document);
+};
+</script>
+<script src="assets/js/components.js"></script>
+</body></html>

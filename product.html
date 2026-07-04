@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product · Dexin Advanced Ceramics</title>
+<meta name="description" content="Dexin product detail — specifications, applications and quote request.">
+<link rel="icon" type="image/jpeg" href="assets/img/site/logo_emblem.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header id="site-header" data-variant="solid"></header>
+
+<main>
+  <!-- ================= PAGE HERO ================= -->
+  <section class="page-hero"><div class="container inner">
+    <div class="crumbs">
+      <a href="index.html"><span data-en>Home</span><span data-zh>首页</span></a><span>/</span>
+      <a href="products.html"><span data-en>Products</span><span data-zh>产品中心</span></a><span>/</span>
+      <span id="pd-crumb" data-en>Product</span><span id="pd-crumb-zh" data-zh>产品</span>
+    </div>
+    <span class="eyebrow"><span data-en>Product detail</span><span data-zh>产品详情</span></span>
+    <h1 id="pd-title"><span data-en>Product</span><span data-zh>产品</span></h1>
+    <p><span data-en>Specifications, applications and a fast route to pricing and samples — from a single trusted Suzhou source.</span><span data-zh>规格、应用，以及快速获取报价与样品的通道——来自值得信赖的苏州供应商。</span></p>
+  </div></section>
+
+  <!-- ================= PRODUCT DETAIL ================= -->
+  <section class="section">
+    <div class="container">
+      <div id="pd"></div>
+    </div>
+  </section>
+
+  <!-- ================= RELATED ================= -->
+  <section class="section soft" id="related-sec">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow"><span data-en>You may also need</span><span data-zh>相关推荐</span></span>
+        <h2><span data-en>Related products</span><span data-zh>相关产品</span></h2>
+      </div>
+      <div class="cards c3" id="related"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="assets/js/data.js"></script>
+<script>
+function toast(m){let e=document.querySelector('.dx-toast');if(!e){e=document.createElement('div');e.className='dx-toast';e.style.cssText='position:fixed;left:50%;bottom:34px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:13px 22px;border-radius:100px;font-size:14px;z-index:600;box-shadow:var(--shadow-lg);transition:.3s';document.body.appendChild(e);}e.textContent=m;clearTimeout(e._t);e._t=setTimeout(()=>{e.style.opacity=0;},2600);e.style.opacity=1;}
+
+window.DXPAGE = function(){
+  const U=window.DXUI, D=window.DX;
+  const id=+new URLSearchParams(location.search).get('id');
+  const p=D.products.find(x=>x.id===id);
+  const pdEl=document.getElementById('pd');
+
+  // ---- Not found ----
+  if(!p){
+    document.getElementById('related-sec').style.display='none';
+    pdEl.innerHTML=`<div class="reveal" style="text-align:center;max-width:560px;margin:20px auto 30px">
+      <div style="color:var(--molten);margin-bottom:18px">${U.svg('close')}</div>
+      <h2 style="margin-bottom:12px"><span data-en>Product not found</span><span data-zh>未找到该产品</span></h2>
+      <p class="lead" style="margin-bottom:26px"><span data-en>The product you're looking for doesn't exist or may have moved. Browse our full catalog to find the right material.</span><span data-zh>您查找的产品不存在或已调整。欢迎浏览完整产品目录，找到合适的材料。</span></p>
+      <a class="btn btn-primary" href="products.html">${U.svg('arrow')}<span data-en>Browse all products</span><span data-zh>浏览全部产品</span></a>
+    </div>`;
+    return;
+  }
+
+  const cat=D.cats.find(c=>c.slug===p.cat)||{};
+  const nameActive=(U.lang==='zh'?p.zh:p.en).replace(/"/g,'');
+
+  // ---- crumbs + hero title ----
+  document.getElementById('pd-crumb').textContent=p.en;
+  document.getElementById('pd-crumb-zh').textContent=p.zh;
+  document.getElementById('pd-title').innerHTML=`<span data-en>${p.en}</span><span data-zh>${p.zh}</span>`;
+
+  // ---- gallery ----
+  const gal=(p.gallery&&p.gallery.length?p.gallery:[p.img]);
+  const main=gal[0]||p.img;
+  const thumbs=gal.map((g,i)=>`<img src="${g}" alt="${p.en} ${i+1}" class="${i===0?'active':''}" loading="lazy">`).join('');
+
+  // ---- specs ----
+  const specRows=(p.specs||[]).map(s=>`<tr>
+    <th><span data-en>${s.en}</span><span data-zh>${s.zh}</span></th>
+    <td>${s.v}</td></tr>`).join('');
+
+  // ---- application chips (bilingual, parallel sets) ----
+  const enChips=(p.apps_en||[]).map(a=>`<span>${a}</span>`).join('');
+  const zhChips=(p.apps_zh||[]).map(a=>`<span>${a}</span>`).join('');
+
+  // ---- compact cert badges ----
+  const certBadges=D.certs.slice(0,4).map(c=>`<span class="chip-cert" style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;font-family:var(--display);color:var(--muted);padding:7px 13px;border:1px solid var(--line);border-radius:100px;background:var(--bg-soft)">
+    <span style="color:var(--molten)">${U.svg('check',2)}</span>${c.code}</span>`).join('');
+
+  pdEl.innerHTML=`<div class="pd-grid">
+    <div class="pd-gallery reveal">
+      <div class="main"><img id="pd-main" src="${main}" alt="${p.en}"></div>
+      <div class="pd-thumbs">${thumbs}</div>
+    </div>
+    <div class="pd-info reveal d1">
+      <span class="cat-chip"><span data-en>${cat.en||''}</span><span data-zh>${cat.zh||''}</span></span>
+      <h1><span data-en>${p.en}</span><span data-zh>${p.zh}</span></h1>
+      <p class="desc"><span data-en>${p.blurb_en}</span><span data-zh>${p.blurb_zh}</span></p>
+
+      <table class="spec-table">${specRows}</table>
+      <p class="spec-cap"><span data-en>Standard specifications — sizes, porosity and geometry can be customised to your process.</span><span data-zh>标准规格——尺寸、气孔率与外形可按您的工艺定制。</span></p>
+
+      <h4 style="font-family:var(--display);font-size:14px;margin:4px 0 4px;color:var(--text)"><span data-en>Typical applications</span><span data-zh>典型应用</span></h4>
+      <div class="chips" data-en>${enChips}</div>
+      <div class="chips" data-zh>${zhChips}</div>
+
+      <div class="pd-actions">
+        <a class="btn btn-primary" href="#" data-rfq data-rfq-type="quote" data-rfq-product="${nameActive}">${U.svg('quote')}<span data-en>Request a Quote</span><span data-zh>获取报价</span></a>
+        <a class="btn btn-ghost" href="#" data-rfq data-rfq-type="sample" data-rfq-product="${nameActive}">${U.svg('sample')}<span data-en>Request a Sample</span><span data-zh>申请样品</span></a>
+        <a class="btn btn-ghost" href="#" id="pd-dl">${U.svg('arrowdn')}<span data-en>Download datasheet (PDF)</span><span data-zh>下载产品资料 (PDF)</span></a>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:22px">${certBadges}</div>
+      <p class="spec-cap" style="margin-top:12px"><span data-en>Backed by our ISO 9001 quality system and industry credentials.</span><span data-zh>由 ISO 9001 质量体系与行业资质保障。</span></p>
+    </div>
+  </div>`;
+
+  // ---- thumb swap ----
+  const mainImg=document.getElementById('pd-main');
+  pdEl.querySelectorAll('.pd-thumbs img').forEach(t=>{
+    t.addEventListener('click',()=>{
+      mainImg.src=t.getAttribute('src');
+      pdEl.querySelectorAll('.pd-thumbs img').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+
+  // ---- datasheet demo download ----
+  document.getElementById('pd-dl').addEventListener('click',e=>{
+    e.preventDefault();
+    toast(U.lang==='zh'?'演示：技术资料 PDF 将在此下载':'Demo: datasheet PDF would download here');
+  });
+
+  // ---- related products (same category, up to 3) ----
+  const related=D.products.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,3);
+  if(related.length){
+    document.getElementById('related').innerHTML=related.map(rp=>U.productCard(rp)).join('');
+  }else{
+    document.getElementById('related-sec').style.display='none';
+  }
+};
+</script>
+<script src="assets/js/components.js"></script>
+</body></html>

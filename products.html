@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Products · Dexin Advanced Ceramics</title>
+<meta name="description" content="Browse Dexin ceramic foam filters (SiC / alumina / zirconia / mullite), fireproof ceramic insulation materials and casting auxiliaries.">
+<link rel="icon" type="image/jpeg" href="assets/img/site/logo_emblem.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header id="site-header" data-variant="solid"></header>
+
+<main>
+<!-- ================= PAGE HERO ================= -->
+<section class="page-hero">
+  <div class="container inner">
+    <div class="crumbs">
+      <a href="index.html"><span data-en>Home</span><span data-zh>首页</span></a>
+      <span>/</span>
+      <span data-en>Products</span><span data-zh>产品中心</span>
+    </div>
+    <span class="eyebrow"><span data-en>Catalog</span><span data-zh>产品中心</span></span>
+    <h1><span data-en>Products</span><span data-zh>产品中心</span></h1>
+    <p><span data-en>The focused Dexin range — ceramic foam filters, fireproof ceramic insulation materials and casting auxiliaries, all made in our own Suzhou and Nantong plants for foundries and high-temperature industries worldwide.</span><span data-zh>德鑫专注产品线——泡沫陶瓷过滤器、陶瓷防火隔热材料与铸造辅材，均由苏州、南通自有工厂制造，服务全球铸造及高温行业。</span></p>
+  </div>
+</section>
+
+<!-- ================= CATALOG ================= -->
+<section class="section">
+  <div class="container">
+    <div class="tabs" id="catTabs"></div>
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;max-width:none;gap:16px;flex-wrap:wrap;margin-bottom:26px">
+      <p class="lead" id="catCount" style="margin:0;color:var(--muted)"></p>
+      <a class="btn btn-ghost btn-sm" href="#" data-rfq data-rfq-type="quote">
+        <span data-en>Can't find it? Request a quote</span><span data-zh>找不到？获取报价</span>
+      </a>
+    </div>
+    <div class="cards c3" id="productGrid"></div>
+    <p class="stat-note" style="margin-top:26px"><span data-en>Open any product for its full specification table. Sizes, porosity and geometry can be customised — <a href="#" data-rfq data-rfq-type="quote" style="color:var(--molten)">tell us your requirement</a>.</span><span data-zh>点击任意产品查看完整规格表。尺寸、气孔率与外形均可定制——<a href="#" data-rfq data-rfq-type="quote" style="color:var(--molten)">告诉我们您的需求</a>。</span></p>
+  </div>
+</section>
+
+<!-- ================= BROWSE BY INDUSTRY ================= -->
+<section class="section soft">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span data-en>By application</span><span data-zh>按应用</span></span>
+      <h2><span data-en>Browse by industry</span><span data-zh>按行业浏览</span></h2>
+      <p><span data-en>Prefer to start from your process? Pick your industry and we'll point you to the matching materials.</span><span data-zh>更习惯从工艺出发？选择您的行业，我们为您匹配合适材料。</span></p>
+    </div>
+    <div class="ind-grid" id="indGrid"></div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-band">
+  <div class="container inner">
+    <div class="reveal">
+      <h2><span data-en>Need a custom specification?</span><span data-zh>需要定制规格？</span></h2>
+      <p><span data-en>Send your size, porosity, quantity and application — we'll respond with pricing, lead time and a sample plan, usually within one business day.</span><span data-zh>发送您的尺寸、气孔率、数量与应用——我们将回复价格、交期与样品方案，通常一个工作日内。</span></p>
+    </div>
+    <div class="hero-cta reveal d1">
+      <a class="btn btn-primary" href="#" data-rfq data-rfq-type="quote"><span data-en>Request a Quote</span><span data-zh>获取报价</span></a>
+      <a class="btn btn-on-dark" href="#" data-rfq data-rfq-type="sample"><span data-en>Request a Sample</span><span data-zh>申请样品</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="assets/js/data.js"></script>
+<script>
+window.DXPAGE = function(){
+  const U = window.DXUI, D = window.DX;
+
+  // ---- preselect from ?cat= ----
+  const params = new URLSearchParams(location.search);
+  let active = params.get('cat') || 'all';
+  if(active !== 'all' && !D.cats.some(c=>c.slug===active)) active = 'all';
+
+  // ---- build tabs ----
+  const tabsHost = document.getElementById('catTabs');
+  const tabAll = `<button class="tab" data-cat="all"><span data-en>All</span><span data-zh>全部</span></button>`;
+  const tabCats = D.cats.map(c=>
+    `<button class="tab" data-cat="${c.slug}"><span data-en>${c.en}</span><span data-zh>${c.zh}</span></button>`
+  ).join('');
+  tabsHost.innerHTML = tabAll + tabCats;
+
+  const grid = document.getElementById('productGrid');
+  const countEl = document.getElementById('catCount');
+
+  function renderGrid(slug){
+    const list = slug === 'all' ? D.products : D.products.filter(p=>p.cat===slug);
+    grid.innerHTML = list.map(p=>U.productCard(p)).join('');
+    // count line (bilingual)
+    countEl.innerHTML =
+      `<span data-en>Showing ${list.length} product${list.length===1?'':'s'}</span>` +
+      `<span data-zh>共 ${list.length} 款产品</span>`;
+    // re-apply i18n + reveal observers to freshly injected nodes
+    U.applyLang(grid);
+    U.reobserve();
+  }
+
+  function setActive(slug){
+    active = slug;
+    tabsHost.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.cat===slug));
+    renderGrid(slug);
+  }
+
+  // ---- wire tab clicks ----
+  tabsHost.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      setActive(t.dataset.cat);
+      // reflect selection in URL without reload
+      const u = new URL(location);
+      if(t.dataset.cat==='all') u.searchParams.delete('cat'); else u.searchParams.set('cat', t.dataset.cat);
+      history.replaceState(null,'',u);
+    });
+  });
+
+  // ---- industries row ----
+  document.getElementById('indGrid').innerHTML = D.industries.map((c,i)=>`
+    <a class="ind reveal d${(i%3)+1}" href="industries.html?ind=${c.slug}">
+      <span class="ico">${U.svg(c.icon)}</span>
+      <div>
+        <h3><span data-en>${c.en}</span><span data-zh>${c.zh}</span></h3>
+        <p><span data-en>${c.desc_en}</span><span data-zh>${c.desc_zh}</span></p>
+      </div>
+    </a>`).join('');
+
+  // ---- initial paint ----
+  setActive(active);
+};
+</script>
+<script src="assets/js/components.js"></script>
+</body>
+</html>

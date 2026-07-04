@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Industries · Dexin Advanced Ceramics</title>
+<meta name="description" content="Find the right Dexin material for iron, steel, aluminium & copper casting, and industrial furnaces.">
+<link rel="icon" type="image/jpeg" href="assets/img/site/logo_emblem.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header id="site-header" data-variant="solid"></header>
+
+<main>
+<!-- ================= PAGE HERO ================= -->
+<section class="page-hero"><div class="container inner">
+  <div class="crumbs">
+    <a href="index.html"><span data-en>Home</span><span data-zh>首页</span></a><span>/</span>
+    <span data-en>Industries</span><span data-zh>应用行业</span>
+  </div>
+  <span class="eyebrow"><span data-en>Applications</span><span data-zh>应用行业</span></span>
+  <h1><span data-en>Industries we serve</span><span data-zh>服务行业</span></h1>
+  <p><span data-en>Tell us what you cast or build — find the products that fit.</span><span data-zh>告诉我们您要铸造或制造什么——找到适配的产品。</span></p>
+</div></section>
+
+<!-- ================= INDUSTRY BLOCKS ================= -->
+<div id="industryWrap"></div>
+
+<!-- ================= CTA ================= -->
+<section class="cta-band">
+  <div class="container inner">
+    <div class="reveal">
+      <h2><span data-en>Not sure which material fits your process?</span><span data-zh>不确定哪种材料适合您的工艺？</span></h2>
+      <p><span data-en>Send your metal, temperature and application — our engineers will recommend the right filter, insulation board or casting aid.</span><span data-zh>发送您的金属种类、温度与应用场景——我们的工程师将为您推荐合适的过滤器、隔热板或铸造辅材。</span></p>
+    </div>
+    <div class="hero-cta reveal d1">
+      <a class="btn btn-primary" href="#" data-rfq data-rfq-type="quote"><span data-en>Request a Quote</span><span data-zh>获取报价</span></a>
+      <a class="btn btn-on-dark" href="#" data-rfq data-rfq-type="sample"><span data-en>Request a Sample</span><span data-zh>申请样品</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="assets/js/data.js"></script>
+<script>
+window.DXPAGE = function(){
+  const U = window.DXUI, D = window.DX;
+  const wrap = document.getElementById('industryWrap');
+  if(!wrap) return;
+
+  wrap.innerHTML = D.industries.map((ind, i) => {
+    const soft = i % 2 === 1;
+    const prods = (ind.pids || [])
+      .map(id => D.products.find(p => p.id === id))
+      .filter(Boolean);
+    const grid = prods.length
+      ? `<div class="cards c3">${prods.map(p => U.productCard(p)).join('')}</div>`
+      : '';
+    return `
+      <section class="section${soft ? ' soft' : ''}" id="${ind.slug}">
+        <div class="container">
+          <div class="section-head reveal" style="display:flex;align-items:center;gap:18px;max-width:none">
+            <span class="ico" style="width:58px;height:58px;border-radius:14px;background:var(--ink);color:var(--molten);display:grid;place-items:center;flex:0 0 auto">${U.svg(ind.icon)}</span>
+            <div>
+              <h2 style="font-size:clamp(24px,3vw,38px);margin:0"><span data-en>${ind.en}</span><span data-zh>${ind.zh}</span></h2>
+              <p style="margin-top:8px"><span data-en>${ind.desc_en}</span><span data-zh>${ind.desc_zh}</span></p>
+            </div>
+          </div>
+          ${grid}
+        </div>
+      </section>`;
+  }).join('');
+
+  // re-run reveal/observers on freshly injected nodes
+  if(U.reobserve) U.reobserve();
+
+  // deep-link: ?ind=<slug>
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('ind');
+  if(slug){
+    const el = document.getElementById(slug);
+    if(el) setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 240);
+  }
+};
+</script>
+<script src="assets/js/components.js"></script>
+</body></html>
