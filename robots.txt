@@ -1,0 +1,6 @@
+# szdexintc.com — all crawlers welcome, including AI/answer-engine bots
+# (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bingbot, Baiduspider)
+User-agent: *
+Allow: /
+
+Sitemap: https://szdexintc.com/sitemap.xml
