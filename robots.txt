@@ -1,6 +1,32 @@
-# szdexintc.com — all crawlers welcome, including AI/answer-engine bots
-# (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bingbot, Baiduspider)
+# szdexintc.com — all crawlers welcome, especially Chinese search & AI engines.
 User-agent: *
+Allow: /
+
+# ByteDance crawler — feeds Toutiao/Douyin search, which powers Doubao (豆包) answers
+User-agent: Bytespider
+Allow: /
+
+# Chinese search engines
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
+# International AI / answer engines
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://szdexintc.com/sitemap.xml

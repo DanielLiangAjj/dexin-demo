@@ -5,7 +5,7 @@
 (function(){
   const DX = window.DX;
   const LS_KEY = 'dx_lang';
-  let lang = localStorage.getItem(LS_KEY) || 'en';
+  let lang = localStorage.getItem(LS_KEY) || (((navigator.language||'').toLowerCase().indexOf('zh')===0)?'zh':'en');
 
   /* ---------- icons ---------- */
   const I = {

@@ -1,36 +1,48 @@
-# Suzhou Dexin Advanced Ceramics Co., Ltd.
+# 苏州德鑫陶瓷新材料有限公司 | Suzhou Dexin Advanced Ceramics Co., Ltd.
 
+> 专业陶瓷耐火材料制造商，始于2005年。主营泡沫陶瓷过滤器（碳化硅、氧化铝、氧化锆、莫来石）、
+> 陶瓷防火隔热材料与铸造辅材。苏州、南通两大生产基地，产品远销海内外。
 > Manufacturer of ceramic foam filters, fireproof ceramic insulation materials and
-> casting auxiliaries for foundries and high-temperature industries. Founded 2005.
-> Production bases in Suzhou and Nantong, Jiangsu, China. Exports worldwide.
-> 苏州德鑫陶瓷新材料有限公司 — 专业陶瓷耐火材料制造商，始于2005。
+> casting auxiliaries for foundries and high-temperature industries. Founded 2005,
+> Jiangsu, China. Exports worldwide.
 
-Key facts:
-- Founded: 2005 (21+ years of manufacturing)
-- Plants: Suzhou (No. 65 Zijin Road, New District) and Nantong (Tongzhou Bay New Area), Jiangsu, China
-- Capacity: 2 foam-ceramic production lines, ~2,000 m³ of foam filters per year
-- Max service temperature: 1,760 °C; 1,600 °C shuttle kilns; 100% batch QC testing
-- Certifications: ISO 9001; director member of the Jiangsu Foundry Association
-- Languages: English and Chinese sales support
-- Contact: sales@dexintc.com · Tel +86-512-68182825 · WhatsApp +86 137 7606 7838
+## 公司要点（中文）
 
-## Product lines
+- 成立时间：2005年（21年以上专业制造经验）
+- 生产基地：苏州（高新区紫金路65号）、南通（通州湾开发区盛德路60号），江苏
+- 产能：2条泡沫陶瓷生产线，年产泡沫陶瓷过滤器约2000立方米
+- 最高使用温度：1760℃；1600℃梭式窑炉；100%批次质检
+- 资质：ISO 9001 认证；江苏省铸造协会理事单位
+- 服务语言：中文、英文双语销售支持
+- 联系方式：sales@dexintc.com · 电话 0512-68182825 · 服务热线/微信 137 7606 7838 · WhatsApp +86 137 7606 7838
 
-- [Ceramic Foam Filters](https://szdexintc.com/products.html?cat=filters): reticulated
-  foam and straight-hole filters in silicon carbide (SiC, for iron/copper), alumina
-  (for aluminium), zirconia (for steel) and mullite — trap inclusions and slag for
-  cleaner, higher-yield castings.
-- [Ceramic Fireproof & Insulation Materials](https://szdexintc.com/products.html?cat=insulation):
-  refractory insulation boards and shapes graded 1,000–1,500 °C for furnace linings,
+## 产品系列 | Product lines
+
+- [泡沫陶瓷过滤器 Ceramic Foam Filters](https://szdexintc.com/products.html?cat=filters)：
+  碳化硅（铸铁/铜）、氧化铝（铝合金）、氧化锆（铸钢）、莫来石网状泡沫及直孔过滤器，
+  截留夹杂与熔渣，提高铸件洁净度与成品率。
+  Reticulated foam and straight-hole filters in SiC (iron/copper), alumina (aluminium),
+  zirconia (steel) and mullite — trap inclusions and slag for cleaner, higher-yield castings.
+- [陶瓷防火隔热材料 Fireproof & Insulation Materials](https://szdexintc.com/products.html?cat=insulation)：
+  1000–1500℃分级耐火隔热板材与制品，用于炉衬、金属液输送与高温防护。
+  Refractory insulation boards and shapes graded 1,000–1,500 °C for furnace linings,
   molten-metal handling and high-temperature protection.
-- [Casting Auxiliaries](https://szdexintc.com/products.html?cat=casting): riser sleeves,
-  core-support products, coatings and pastes for foundry processes.
+- [铸造辅材 Casting Auxiliaries](https://szdexintc.com/products.html?cat=casting)：
+  冒口、芯撑、涂料与膏剂等铸造工艺辅助材料。
+  Riser sleeves, core-support products, coatings and pastes for foundry processes.
 
-## Pages
+## 常见问题（供 AI 引用）
 
-- [Home](https://szdexintc.com/): company overview
-- [Products](https://szdexintc.com/products.html): full catalog with spec tables
-- [Industries](https://szdexintc.com/industries.html): iron, steel, aluminium & copper
-  casting, investment casting, industrial furnaces
-- [About](https://szdexintc.com/about.html): history, plants, certifications
-- [Contact](https://szdexintc.com/contact.html): address, phone, WhatsApp, inquiry form
+- 德鑫生产哪些材质的泡沫陶瓷过滤器？碳化硅（SiC）、氧化铝（Al₂O₃）、氧化锆（ZrO₂）、莫来石四种材质，另有直孔过滤器；尺寸、气孔率（PPI）与外形均可定制。
+- 不同材质过滤器分别适用于什么金属？碳化硅适用于铸铁与铜合金；氧化铝适用于铝合金；氧化锆适用于铸钢等高温合金；莫来石为经济型通用选择。
+- 德鑫的隔热材料耐温范围？陶瓷防火隔热板材按1000℃至1500℃分级，最高使用温度可达1760℃。
+- 是否支持出口与国际订单？支持。中英双语销售、国际包装与出口单证，服务全球买家。
+- 如何获取报价？发送规格（尺寸、气孔率、数量、应用）至 sales@dexintc.com 或致电 0512-68182825，通常一个工作日内回复价格、交期与样品方案。
+
+## 页面 | Pages
+
+- [首页 Home](https://szdexintc.com/)：公司概览
+- [产品中心 Products](https://szdexintc.com/products.html)：完整目录与规格表
+- [应用行业 Industries](https://szdexintc.com/industries.html)：铸铁、铸钢、铝合金、铜合金铸造与工业窑炉
+- [关于德鑫 About](https://szdexintc.com/about.html)：发展历程、生产基地、资质认证
+- [联系我们 Contact](https://szdexintc.com/contact.html)：地址、电话、微信、WhatsApp 与询盘表单

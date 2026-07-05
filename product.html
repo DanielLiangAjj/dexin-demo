@@ -3,16 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Product · Dexin Advanced Ceramics</title>
-<meta name="description" content="Dexin product detail — specifications, applications and quote request.">
+<title>产品详情 · 德鑫陶瓷 | Product · Dexin Advanced Ceramics</title>
+<meta name="description" content="德鑫产品详情 — 规格参数、典型应用与快速报价。Dexin product detail — specifications, applications and quote request.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Suzhou Dexin Advanced Ceramics">
-<meta property="og:title" content="Product · Dexin Advanced Ceramics">
-<meta property="og:description" content="Dexin product detail — specifications, applications and quote request.">
+<meta property="og:title" content="产品详情 · 德鑫陶瓷 | Product · Dexin Advanced Ceramics">
+<meta property="og:description" content="德鑫产品详情 — 规格参数、典型应用与快速报价。Dexin product detail — specifications, applications and quote request.">
 <meta property="og:image" content="https://szdexintc.com/assets/img/site/factory_building.jpg">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="keywords" content="泡沫陶瓷过滤器,碳化硅过滤器,氧化铝过滤器,氧化锆过滤器,莫来石过滤器,陶瓷防火隔热材料,铸造辅材,苏州德鑫陶瓷,ceramic foam filter,SiC foam filter,casting auxiliaries">
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform">
 <meta name="theme-color" content="#0b2545">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
@@ -84,9 +87,9 @@ window.DXPAGE = function(){
 
   // ---- per-product SEO: title, description, canonical, Product JSON-LD ----
   const pageUrl='https://szdexintc.com/product.html?id='+p.id;
-  document.title=p.en+' · Dexin Advanced Ceramics';
+  document.title=p.zh+' '+p.en+' · 德鑫陶瓷 Dexin';
   const md=document.querySelector('meta[name="description"]');
-  if(md) md.setAttribute('content',p.blurb_en);
+  if(md) md.setAttribute('content',p.blurb_zh+' '+p.blurb_en);
   const canon=document.createElement('link');
   canon.rel='canonical'; canon.href=pageUrl;
   document.head.appendChild(canon);
@@ -94,7 +97,7 @@ window.DXPAGE = function(){
   ld.type='application/ld+json';
   ld.textContent=JSON.stringify({
     '@context':'https://schema.org','@type':'Product',
-    name:p.en, alternateName:p.zh, description:p.blurb_en,
+    name:p.en, alternateName:p.zh, description:p.blurb_zh+' '+p.blurb_en,
     image:'https://szdexintc.com/'+p.img, url:pageUrl,
     category:(cat.en||''), brand:{'@type':'Brand',name:'DEXIN'},
     manufacturer:{'@type':'Organization',name:'Suzhou Dexin Advanced Ceramics Co., Ltd.',url:'https://szdexintc.com/'}
