@@ -61,6 +61,7 @@
 <footer id="site-footer"></footer>
 
 <script src="assets/js/data.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script>
 window.DXPAGE = function(){
   const U=window.DXUI, D=window.DX;
@@ -118,8 +119,11 @@ window.DXPAGE = function(){
     <td>${s.v}</td></tr>`).join('');
 
   // ---- application chips (bilingual, parallel sets) ----
+  const trApp=(L,a)=>((window.DX_I18N&&window.DX_I18N[L]&&window.DX_I18N[L][a])||a);
   const enChips=(p.apps_en||[]).map(a=>`<span>${a}</span>`).join('');
   const zhChips=(p.apps_zh||[]).map(a=>`<span>${a}</span>`).join('');
+  const esChips=(p.apps_en||[]).map(a=>`<span>${trApp('es',a)}</span>`).join('');
+  const arChips=(p.apps_en||[]).map(a=>`<span>${trApp('ar',a)}</span>`).join('');
 
   // ---- compact cert badges ----
   const certBadges=D.certs.slice(0,4).map(c=>`<span class="chip-cert" style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;font-family:var(--display);color:var(--muted);padding:7px 13px;border:1px solid var(--line);border-radius:100px;background:var(--bg-soft)">
@@ -139,8 +143,10 @@ window.DXPAGE = function(){
       <p class="spec-cap"><span data-en>Standard specifications — sizes, porosity and geometry can be customised to your process.</span><span data-zh>标准规格——尺寸、气孔率与外形可按您的工艺定制。</span></p>
 
       <h4 style="font-family:var(--display);font-size:14px;margin:4px 0 4px;color:var(--text)"><span data-en>Typical applications</span><span data-zh>典型应用</span></h4>
-      <div class="chips" data-en>${enChips}</div>
+      <div class="chips" data-en data-i18n-es="1" data-i18n-ar="1">${enChips}</div>
       <div class="chips" data-zh>${zhChips}</div>
+      <div class="chips" data-es>${esChips}</div>
+      <div class="chips" data-ar>${arChips}</div>
 
       <div class="pd-actions">
         <a class="btn btn-primary" href="#" data-rfq data-rfq-type="quote" data-rfq-product="${nameActive}">${U.svg('quote')}<span data-en>Request a Quote</span><span data-zh>获取报价</span></a>
@@ -166,7 +172,7 @@ window.DXPAGE = function(){
   // ---- datasheet request -> RFQ modal ----
   document.getElementById('pd-dl').addEventListener('click',e=>{
     e.preventDefault();
-    U.openRFQ(nameActive+(U.lang==='zh'?'（索取产品资料）':' (datasheet request)'),'quote');
+    U.openRFQ(nameActive+({zh:'（索取产品资料）',es:' (solicitud de ficha técnica)',ar:' (طلب ورقة بيانات)'}[U.lang]||' (datasheet request)'),'quote');
   });
 
   // ---- related products (same category, up to 3) ----

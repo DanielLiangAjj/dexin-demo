@@ -5,7 +5,14 @@
 (function(){
   const DX = window.DX;
   const LS_KEY = 'dx_lang';
-  let lang = localStorage.getItem(LS_KEY) || (((navigator.language||'').toLowerCase().indexOf('zh')===0)?'zh':'en');
+  const LANGS = ['en','zh','es','ar'];
+  const LANG_NAME = {en:'English', zh:'中文', es:'Español', ar:'العربية'};
+  const LANG_SHORT = {en:'EN', zh:'中文', es:'ES', ar:'AR'};
+  let lang = localStorage.getItem(LS_KEY);
+  if(!LANGS.includes(lang)){
+    const nav=(navigator.language||'').toLowerCase().slice(0,2);
+    lang = LANGS.includes(nav) && nav!=='en' ? nav : 'en';
+  }
 
   /* ---------- icons ---------- */
   const I = {
@@ -84,9 +91,11 @@
       </a>
       <nav><ul class="nav">${items}</ul></nav>
       <div class="header-actions">
-        <div class="lang-toggle">
-          <button data-lang="en" class="${lang==='en'?'active':''}">EN</button>
-          <button data-lang="zh" class="${lang==='zh'?'active':''}">中文</button>
+        <div class="lang-menu">
+          <button class="lang-cur" aria-haspopup="listbox" aria-label="Language / 语言">${svg('globe',1.6)}<span class="lc">${LANG_SHORT[lang]}</span>${svg('arrowdn',2)}</button>
+          <div class="lang-opts" role="listbox">
+            ${LANGS.map(l=>`<button data-lang="${l}" class="${lang===l?'active':''}" role="option">${LANG_NAME[l]}</button>`).join('')}
+          </div>
         </div>
         <a class="btn btn-primary btn-sm" href="#" data-rfq data-rfq-type="quote">${svg('quote')}<span data-en>Request a Quote</span><span data-zh>获取报价</span></a>
         <button class="hamburger" aria-label="Menu">${svg('menu')}</button>
@@ -98,14 +107,19 @@
       navItems().map(n=>`<a href="${n.href}"><span data-en>${n.en}</span><span data-zh>${n.zh}</span></a>`).join('') +
       DX.cats.map(c=>`<a class="sub" href="products.html?cat=${c.slug}"><span data-en>${c.en}</span><span data-zh>${c.zh}</span></a>`).join('') +
       `<a href="#" data-rfq data-rfq-type="quote" style="color:var(--molten)"><span data-en>→ Request a Quote</span><span data-zh>→ 获取报价</span></a>
-       <div style="margin-top:20px"><button class="btn btn-ghost btn-sm" data-lang-m="${lang==='en'?'zh':'en'}" style="color:#fff;border-color:rgba(255,255,255,.3)">${lang==='en'?'切换到中文':'Switch to English'}</button></div>`;
+       <div class="mnav-langs">${LANGS.map(l=>`<button data-lang="${l}" class="${lang===l?'active':''}">${LANG_NAME[l]}</button>`).join('')}</div>`;
     document.body.appendChild(mob);
     host.querySelector('.hamburger').onclick=()=>mob.classList.add('open');
     mob.querySelector('.mclose').onclick=()=>mob.classList.remove('open');
     mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mob.classList.remove('open')));
-    const lm = mob.querySelector('[data-lang-m]'); if(lm) lm.onclick=()=>{setLang(lm.dataset.langM);mob.classList.remove('open');};
+    mob.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{setLang(b.dataset.lang);mob.classList.remove('open');});
     // lang buttons
     host.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+    const lm = host.querySelector('.lang-menu');
+    if(lm){
+      lm.querySelector('.lang-cur').onclick = e=>{ e.stopPropagation(); lm.classList.toggle('open'); };
+      document.addEventListener('click', e=>{ if(!lm.contains(e.target)) lm.classList.remove('open'); });
+    }
     // scroll solid
     if(overlay){
       const onScroll=()=>host.classList.toggle('solid', window.scrollY>40);
@@ -233,21 +247,52 @@
       head.innerHTML='<span data-en>Request a Quote</span><span data-zh>获取报价</span>';
       sub.innerHTML='<span data-en>Send us your specs and we will reply with pricing and lead time.</span><span data-zh>发送规格需求，我们将回复价格与交期。</span>';
     }
-    m.querySelector('#rfq-product').value = product || (lang==='zh'?'综合询盘':'General enquiry');
+    m.querySelector('#rfq-product').value = product || ({zh:'综合询盘',es:'Consulta general',ar:'استفسار عام'}[lang]||'General enquiry');
     applyLang(m);
     m.classList.add('open');
   }
 
   /* ---------- i18n ---------- */
+  const normKey = s => s.replace(/\s+/g,' ').trim();
+  function expandI18n(root){
+    const I = window.DX_I18N; if(!I) return;
+    ['es','ar'].forEach(L=>{
+      const dict = I[L]; if(!dict) return;
+      (root||document).querySelectorAll('[data-en]:not([data-i18n-'+L+'])').forEach(el=>{
+        el.setAttribute('data-i18n-'+L,'1');
+        const tr = dict[normKey(el.textContent)];
+        if(!tr) return;                     // no translation -> EN fallback stays visible
+        const n = el.cloneNode(false);
+        n.removeAttribute('data-en'); n.removeAttribute('id');
+        n.removeAttribute('data-i18n-es'); n.removeAttribute('data-i18n-ar');
+        n.setAttribute('data-'+L,'');
+        n.innerHTML = tr;
+        el.classList.add('has-'+L);
+        // insert after the matching zh sibling when present, else right after el
+        const zh = el.nextElementSibling && el.nextElementSibling.hasAttribute('data-zh') ? el.nextElementSibling : el;
+        zh.parentNode.insertBefore(n, zh.nextSibling);
+      });
+    });
+  }
   function applyLang(root){
+    expandI18n(root);
     (root||document).querySelectorAll('[data-en-ph]').forEach(el=>{
-      el.placeholder = lang==='zh' ? (el.dataset.zhPh||el.dataset.enPh) : el.dataset.enPh;
+      let ph = el.dataset.enPh;
+      if(lang==='zh') ph = el.dataset.zhPh || ph;
+      else if(lang==='es'||lang==='ar'){
+        const d = window.DX_I18N && window.DX_I18N[lang];
+        ph = (d && d[normKey(el.dataset.enPh)]) || ph;
+      }
+      el.placeholder = ph;
     });
   }
   function setLang(l){
     lang=l; localStorage.setItem(LS_KEY,l);
     document.documentElement.lang=l;
+    document.documentElement.dir = (l==='ar') ? 'rtl' : 'ltr';
     document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+    document.querySelectorAll('.lang-menu .lc').forEach(e=>e.textContent=LANG_SHORT[l]);
+    document.querySelectorAll('.lang-menu').forEach(m=>m.classList.remove('open'));
     applyLang(document);
     document.dispatchEvent(new CustomEvent('dx:lang',{detail:{lang:l}}));
   }
@@ -343,10 +388,11 @@
   /* ---------- boot ---------- */
   function boot(){
     document.documentElement.lang=lang;
+    document.documentElement.dir = (lang==='ar') ? 'rtl' : 'ltr';
     buildHeader(); buildFooter(); buildModal(); bindRFQ();
-    applyLang(document);
     // page-specific render hook
     if(window.DXPAGE) try{ window.DXPAGE(); }catch(err){ console.error(err); }
+    applyLang(document);
     initObservers();
     initSlideshow('.hero-media'); initSlideshow('.factory .media');
   }

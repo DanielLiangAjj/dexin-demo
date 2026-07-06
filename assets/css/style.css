@@ -426,7 +426,8 @@ html[lang="zh"] .i18n-inline [data-en]{display:none}
   .foot-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:920px){
-  .nav,.header-actions .lang-toggle,.header-actions .btn{display:none}
+  .nav,.header-actions .btn{display:none}
+  .lang-cur{padding:7px 11px}
   .hamburger{display:grid}
   .statband .grid{grid-template-columns:repeat(2,1fr);gap:18px}
   .stat:nth-child(2n){border-right:0}
@@ -457,3 +458,32 @@ html[lang="zh"] .i18n-inline [data-en]{display:none}
 /* real brand logo + wechat QR photo */
 .brand img.mark{width:66px;height:38px;object-fit:contain;background:#fff;padding:3px 6px}
 .wechat img.qr{object-fit:contain;padding:4px}
+
+/* ================= language picker (EN / 中文 / ES / AR) ================= */
+.lang-menu{position:relative}
+.lang-cur{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1.5px solid rgba(255,255,255,.35);
+  border-radius:100px;color:rgba(255,255,255,.92);padding:8px 14px;font-family:var(--display);font-weight:600;font-size:13.5px;transition:.2s}
+.lang-cur svg{width:15px;height:15px}
+.lang-cur:hover{border-color:var(--molten);color:#fff}
+.site-header.solid .lang-cur,.site-header.static-solid .lang-cur{border-color:var(--line);color:var(--muted)}
+.lang-opts{position:absolute;top:calc(100% + 10px);inset-inline-end:0;background:#fff;border:1px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow-lg);min-width:150px;padding:6px;display:none;z-index:520}
+.lang-menu.open .lang-opts{display:block}
+.lang-opts button{display:block;width:100%;text-align:start;background:transparent;border:0;border-radius:9px;
+  padding:10px 14px;font-family:var(--display);font-weight:600;font-size:14px;color:var(--text);cursor:pointer}
+.lang-opts button:hover{background:var(--bg-soft)}
+.lang-opts button.active{background:var(--ink);color:#fff}
+.mnav-langs{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.mnav-langs button{background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:100px;color:#fff;padding:8px 16px;font-size:14px}
+.mnav-langs button.active{background:var(--molten);border-color:var(--molten)}
+
+/* ================= es / ar language spans ================= */
+[data-es],[data-ar]{display:none}
+html[lang="es"] [data-en].has-es{display:none}
+html[lang="es"] [data-es]{display:revert}
+html[lang="ar"] [data-en].has-ar{display:none}
+html[lang="ar"] [data-ar]{display:revert}
+/* chip rows are flex containers — revert would break them */
+html[lang="zh"] .chips[data-zh],html[lang="es"] .chips[data-es],html[lang="ar"] .chips[data-ar]{display:flex}
+html[lang="ar"] body{line-height:1.85}
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3{letter-spacing:0}

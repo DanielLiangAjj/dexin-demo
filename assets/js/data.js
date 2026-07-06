@@ -82,16 +82,17 @@ window.DX = {
       blurb_en: "Gray silicon-carbide foam filter with excellent strength and thermal-shock resistance. Its three-dimensional reticulated structure traps oxide films and non-metallic inclusions in iron and copper melts — smoothing turbulent flow for cleaner castings and a lower reject rate.",
       blurb_zh: "灰色碳化硅泡沫过滤器，强度高、抗热震性优异。三维网状结构可截留铸铁、铜合金熔液中的氧化膜与非金属夹杂，平稳金属液流动，提高铸件洁净度、降低废品率。",
       img: "assets/img/products/sic.jpg",
-      gallery: ["assets/img/products/sic.jpg", "assets/img/products/card_sic.jpg"],
+      gallery: ["assets/img/products/sic.jpg", "assets/img/products/card_sic.jpg", "assets/img/products/sic_report_cover.jpg", "assets/img/products/sic_report_data.jpg", "assets/img/products/sic_report_photo.jpg"],
       specs: [
         { en: "Material", zh: "材质", v: "Silicon Carbide (SiC)" },
+        { en: "Composition (tested)", zh: "化学成分（实测）", v: "SiC ≈70% · Al₂O₃ ≈15% · SiO₂ ≈14%" },
         { en: "Colour", zh: "颜色", v: "Gray / 灰" },
         { en: "Max. working temp.", zh: "最高使用温度", v: "≤ 1500 °C" },
         { en: "Porosity", zh: "气孔率", v: "80 – 90 %" },
         { en: "Pore density", zh: "孔径", v: "6 – 50 PPI" },
         { en: "Compressive strength", zh: "抗压强度", v: "≥ 1.5 MPa" },
         { en: "Volume density", zh: "体积密度", v: "≤ 0.5 g/cm³" },
-        { en: "Thermal shock", zh: "抗热震", v: "1100 °C → RT, ≥ 5 cycles" },
+        { en: "Thermal shock", zh: "抗热震", v: "1100 °C → RT, ≥ 3 cycles" },
         { en: "Dimensions", zh: "尺寸", v: "□30–500 / Ø30–500 mm · t 8–50 mm" },
         { en: "Application", zh: "适用", v: "Gray iron / ductile iron / copper alloy" }
       ],
@@ -334,10 +335,11 @@ window.DX = {
   /* ---- real certifications & honors (with certificate scans) ---- */
   certs: [
     { code: "ISO 9001", en: "Quality Management System", zh: "质量管理体系认证", img: "assets/img/site/certs/iso9001.jpg" },
+    { code: "国检报告", en: "National Ceramics & Refractories QC Center — SiC filter test report", zh: "国家陶瓷与耐火材料质检中心检验报告（碳化硅）", img: "assets/img/site/certs/sic_report_cover.jpg" },
     { code: "理事单位", en: "Jiangsu Foundry Association — Director Member", zh: "江苏省铸造协会理事单位", img: "assets/img/site/certs/jsfa.jpg" },
     { code: "金鼎奖", en: "China Foundry Material “Gold Tripod” Award", zh: "全国铸造材料金鼎奖", img: "assets/img/site/certs/goldtripod.jpg" },
     { code: "AAA", en: "AAA Credit-rated Enterprise", zh: "AAA级信用企业", img: "assets/img/site/certs/aaa.jpg" },
-    { code: "RoHS", en: "RoHS hazardous-substance compliant (SGS tested)", zh: "RoHS 有害物质合规（SGS 检测）", img: "assets/img/site/certs/rohs.jpg" }
+    { code: "RoHS", en: "RoHS compliant — SGS tested (ceramic fibre insulation)", zh: "RoHS 有害物质合规 — SGS 检测（陶瓷纤维隔热材料）", img: "assets/img/site/certs/rohs.jpg" }
   ],
 
   /* ---- results / case studies ---- */
