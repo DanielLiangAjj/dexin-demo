@@ -23,13 +23,17 @@ window.DX = {
     whatsapp: "+86 137 7606 7838",
     whatsapp_link: "https://wa.me/8613776067838",
     zip: "215011",
-    email: "sales@dexintc.com",
-    web: "www.dexintc.com",
+    email: "dexintc@163.com",
+    web: "www.szdexintc.com",
     addr_en: "No. 65 Zijin Road, New District, Suzhou, Jiangsu, China",
     addr_zh: "中国江苏省苏州高新区紫金路65号",
     factory_en: "No. 60 Shende Road, Tongzhou Bay New Area, Nantong, Jiangsu, China",
     factory_zh: "江苏省南通市通州湾开发区盛德路60号"
   },
+
+  /* ---- inquiry form: free access key from web3forms.com (create with
+     dexintc@163.com, paste between the quotes). Empty = mailto fallback. ---- */
+  forms: { web3forms_key: "" },
 
   /* ---- headline numbers (real company figures) ---- */
   stats: [
@@ -333,7 +337,7 @@ window.DX = {
     { code: "理事单位", en: "Jiangsu Foundry Association — Director Member", zh: "江苏省铸造协会理事单位", img: "assets/img/site/certs/jsfa.jpg" },
     { code: "金鼎奖", en: "China Foundry Material “Gold Tripod” Award", zh: "全国铸造材料金鼎奖", img: "assets/img/site/certs/goldtripod.jpg" },
     { code: "AAA", en: "AAA Credit-rated Enterprise", zh: "AAA级信用企业", img: "assets/img/site/certs/aaa.jpg" },
-    { code: "RoHS", en: "RoHS hazardous-substance compliant", zh: "RoHS 有害物质合规", img: "" }
+    { code: "RoHS", en: "RoHS hazardous-substance compliant (SGS tested)", zh: "RoHS 有害物质合规（SGS 检测）", img: "assets/img/site/certs/rohs.jpg" }
   ],
 
   /* ---- results / case studies ---- */

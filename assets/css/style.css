@@ -453,3 +453,7 @@ html[lang="zh"] .i18n-inline [data-en]{display:none}
   .reveal{opacity:1;transform:none}
   .hero-media .slide{animation:none}
 }
+
+/* real brand logo + wechat QR photo */
+.brand img.mark{width:66px;height:38px;object-fit:contain;background:#fff;padding:3px 6px}
+.wechat img.qr{object-fit:contain;padding:4px}

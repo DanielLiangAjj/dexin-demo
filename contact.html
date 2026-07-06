@@ -20,8 +20,8 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta name="theme-color" content="#0b2545">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
-<link rel="icon" type="image/jpeg" href="assets/img/site/logo_emblem.jpg">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
+<link rel="icon" type="image/jpeg" href="assets/img/site/logo_square.jpg">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -111,7 +111,7 @@
               <span data-en>Send inquiry</span><span data-zh>发送询盘</span>
             </button>
             <div class="form-note">
-              <span><span data-en>Demo form — not connected. Wire it to email or a form service (Formspree / Web3Forms) to receive submissions.</span><span data-zh>演示表单（未连接）。可接入邮箱或表单服务（Formspree / Web3Forms）以接收提交内容。</span></span>
+              <span><span data-en>Your inquiry goes straight to our sales team — we usually reply within one business day.</span><span data-zh>您的询盘将直达我们的销售团队——通常一个工作日内回复。</span></span>
             </div>
           </form>
         </div>
@@ -138,7 +138,6 @@
         <a class="btn btn-ghost" href="https://www.openstreetmap.org/search?query=Suzhou%20High-tech%20Zone" target="_blank" rel="noopener" style="margin-top:22px">
           <span data-en>Open in maps</span><span data-zh>在地图中打开</span>
         </a>
-        <p class="stat-note" style="margin-top:18px"><span data-en>* Map placeholder for this demo — embed a live map for production.</span><span data-zh>* 本演示为地图占位——正式上线请嵌入实时地图。</span></p>
       </div>
     </div>
   </div>
@@ -175,7 +174,7 @@ window.DXPAGE = function(){
   }).join('');
 
   // wechat icon ~120px box
-  document.getElementById('wechatBox').innerHTML = U.svg('wechat',1.2).replace('<svg ', '<svg style="width:88px;height:88px" ');
+  document.getElementById('wechatBox').innerHTML = '<img src="assets/img/site/wechat_qr.jpg" alt="WeChat QR 微信二维码" style="width:100%;height:100%;object-fit:contain;border-radius:10px">';
 
   // whatsapp quick-contact button
   const wa = document.getElementById('waBtn');
@@ -188,9 +187,12 @@ window.DXPAGE = function(){
 
   // form submit -> success state
   const form = document.getElementById('inquiryForm');
-  form.addEventListener('submit', function(e){
+  form.addEventListener('submit', async function(e){
     e.preventDefault();
     if(!form.checkValidity()){ form.reportValidity(); return; }
+    const btn=form.querySelector('button[type=submit]'); if(btn) btn.disabled=true;
+    const g=id=>{const el=document.getElementById(id);return el?el.value.trim():'';};
+    await U.submitInquiry({name:g('f-name'),company:g('f-company'),email:g('f-email'),phone:g('f-phone'),product:g('f-product'),message:g('f-message')});
     form.innerHTML = `
       <div class="form-ok show" style="padding:18px 0">
         <div class="ck">${U.svg('check',2.4)}</div>

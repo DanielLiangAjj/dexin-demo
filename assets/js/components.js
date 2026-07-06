@@ -1,5 +1,5 @@
 /* =====================================================================
-   DEXIN demo — shared UI: header, footer, mega-menu, i18n, modal,
+   DEXIN — shared UI: header, footer, mega-menu, i18n, modal,
    hero slideshow, count-up, reveal, render helpers.
    ===================================================================== */
 (function(){
@@ -79,7 +79,7 @@
     }).join('');
     host.innerHTML = `<div class="container bar">
       <a class="brand" href="index.html">
-        <span class="mark">${svg('flame',1.8)}</span>
+        <img class="mark" src="assets/img/site/logo.jpg" alt="Dexin 德鑫">
         <span>DEXIN<small><span data-en>Advanced Ceramics</span><span data-zh>德鑫陶瓷新材料</span></small></span>
       </a>
       <nav><ul class="nav">${items}</ul></nav>
@@ -122,9 +122,9 @@
     host.innerHTML = `<div class="container">
       <div class="foot-grid">
         <div>
-          <a class="brand" href="index.html"><span class="mark">${svg('flame',1.8)}</span><span>DEXIN</span></a>
+          <a class="brand" href="index.html"><img class="mark" src="assets/img/site/logo.jpg" alt="Dexin 德鑫"><span>DEXIN</span></a>
           <p><span data-en>${DX.company.en} — advanced ceramic & refractory materials for the global foundry and high-temperature industries.</span><span data-zh>${DX.company.zh}——为全球铸造及高温行业提供先进陶瓷与耐火材料。</span></p>
-          <div class="wechat"><div class="qr">${svg('wechat',1.4)}</div><div style="font-size:13px"><strong style="color:#fff;display:block"><span data-en>Scan on WeChat</span><span data-zh>微信扫一扫</span></strong><span data-en>Chat with our sales team</span><span data-zh>与销售团队沟通</span></div></div>
+          <div class="wechat"><img class="qr" src="assets/img/site/wechat_qr.jpg" alt="WeChat QR 微信二维码" loading="lazy"><div style="font-size:13px"><strong style="color:#fff;display:block"><span data-en>Scan on WeChat</span><span data-zh>微信扫一扫</span></strong><span data-en>Chat with our sales team</span><span data-zh>与销售团队沟通</span></div></div>
         </div>
         <div class="foot-col"><h4><span data-en>Products</span><span data-zh>产品系列</span></h4>${catLinks}</div>
         <div class="foot-col"><h4><span data-en>Company</span><span data-zh>公司</span></h4>
@@ -143,11 +143,33 @@
         </div>
       </div>
       <div class="foot-bottom">
-        <span>© <span id="yr"></span> ${DX.company.en} · <span data-en>Demo redesign</span><span data-zh>演示改版</span></span>
+        <span>© <span id="yr"></span> ${DX.company.en} · <span data-en>All rights reserved</span><span data-zh>版权所有</span></span>
         <span><span data-en>Zip ${c.zip} · Fax ${c.fax}</span><span data-zh>邮编 ${c.zip} · 传真 ${c.fax}</span></span>
       </div>
     </div>`;
     const yr=document.getElementById('yr'); if(yr) yr.textContent='2026';
+  }
+
+  /* ---------- inquiry submission: Web3Forms, mailto fallback ---------- */
+  async function submitInquiry(f){
+    const key=(DX.forms&&DX.forms.web3forms_key)||'';
+    const subject='Website inquiry — szdexintc.com'+(f.product?' — '+f.product:'');
+    if(key){
+      try{
+        const r=await fetch('https://api.web3forms.com/submit',{method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({access_key:key,subject:subject,from_name:f.name,
+            name:f.name,email:f.email,company:f.company,phone:f.phone,
+            product:f.product,message:f.message})});
+        const res=await r.json();
+        if(res.success) return true;
+      }catch(err){ console.error(err); }
+    }
+    // no key or request failed: open the visitor's mail client pre-filled
+    const body=['Name: '+f.name,'Company: '+f.company,'Email: '+f.email,
+      'Phone: '+f.phone,'Product: '+f.product,'','Message:',f.message].join('\n');
+    location.href='mailto:'+DX.contact.email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    return true;
   }
 
   /* ---------- RFQ / sample modal ---------- */
@@ -164,32 +186,37 @@
       </a>
       <form class="dx-form" novalidate>
         <div class="field"><label><span data-en>Product of interest</span><span data-zh>意向产品</span></label>
-          <input type="text" id="rfq-product" readonly></div>
+          <input type="text" id="rfq-product" name="product" readonly></div>
         <div class="field row">
-          <div class="field"><label><span data-en>Name</span><span data-zh>姓名</span> <span class="req">*</span></label><input required></div>
-          <div class="field"><label><span data-en>Company</span><span data-zh>公司</span></label><input></div>
+          <div class="field"><label><span data-en>Name</span><span data-zh>姓名</span> <span class="req">*</span></label><input name="name" required></div>
+          <div class="field"><label><span data-en>Company</span><span data-zh>公司</span></label><input name="company"></div>
         </div>
         <div class="field row">
-          <div class="field"><label><span data-en>Email</span><span data-zh>邮箱</span> <span class="req">*</span></label><input type="email" required></div>
-          <div class="field"><label><span data-en>Phone / WhatsApp</span><span data-zh>电话/微信</span></label><input></div>
+          <div class="field"><label><span data-en>Email</span><span data-zh>邮箱</span> <span class="req">*</span></label><input type="email" name="email" required></div>
+          <div class="field"><label><span data-en>Phone / WhatsApp</span><span data-zh>电话/微信</span></label><input name="phone"></div>
         </div>
-        <div class="field"><label><span data-en>Requirements (size, quantity, application)</span><span data-zh>需求说明（规格 / 数量 / 应用）</span></label><textarea></textarea></div>
-        <div class="form-note">${svg('shield2',1.5)}<span><span data-en>Demo form — not connected. Wire to email or a form service (Formspree / Web3Forms) to receive submissions.</span><span data-zh>演示表单（未连接）。可接入邮箱或表单服务（Formspree / Web3Forms）以接收提交。</span></span></div>
+        <div class="field"><label><span data-en>Requirements (size, quantity, application)</span><span data-zh>需求说明（规格 / 数量 / 应用）</span></label><textarea name="message"></textarea></div>
+        <div class="form-note">${svg('shield2',1.5)}<span><span data-en>Your inquiry goes straight to our sales team — we usually reply within one business day.</span><span data-zh>您的询盘将直达我们的销售团队——通常一个工作日内回复。</span></span></div>
         <button type="submit" class="btn btn-primary" style="justify-content:center">${svg('arrow')}<span data-en>Send Inquiry</span><span data-zh>发送询盘</span></button>
       </form>
       <div class="form-ok"><div class="ck">${svg('check',2.4)}</div>
         <h3><span data-en>Thank you!</span><span data-zh>提交成功！</span></h3>
-        <p style="color:var(--muted);margin-top:8px"><span data-en>Your inquiry has been captured by the demo. Our team would reply within one business day.</span><span data-zh>演示已记录您的询盘，我们的团队将在一个工作日内回复。</span></p></div>
+        <p style="color:var(--muted);margin-top:8px"><span data-en>We have received your inquiry and will reply within one business day.</span><span data-zh>我们已收到您的询盘，将在一个工作日内回复。</span></p></div>
     </div>`;
     document.body.appendChild(wrap);
     const close=()=>wrap.classList.remove('open');
     wrap.querySelector('.x').onclick=close;
     wrap.addEventListener('click',e=>{if(e.target===wrap)close();});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
-    wrap.querySelector('form').addEventListener('submit',e=>{
+    wrap.querySelector('form').addEventListener('submit',async e=>{
       e.preventDefault();
-      if(!e.target.checkValidity()){e.target.reportValidity();return;}
-      wrap.querySelector('form').style.display='none';
+      const fm=e.target;
+      if(!fm.checkValidity()){fm.reportValidity();return;}
+      const btn=fm.querySelector('button[type=submit]'); if(btn) btn.disabled=true;
+      const v=n=>{const el=fm.querySelector('[name='+n+']');return el?el.value.trim():'';};
+      await submitInquiry({product:v('product'),name:v('name'),company:v('company'),email:v('email'),phone:v('phone'),message:v('message')});
+      if(btn) btn.disabled=false;
+      fm.style.display='none';
       wrap.querySelector('.form-ok').classList.add('show');
     });
   }
@@ -324,7 +351,7 @@
     initSlideshow('.hero-media'); initSlideshow('.factory .media');
   }
   /* ---------- expose (before boot so DXPAGE can use it) ---------- */
-  window.DXUI={ svg, t, get lang(){return lang;}, setLang, openRFQ, productCard, categoryCard, certCard,
+  window.DXUI={ svg, t, get lang(){return lang;}, setLang, openRFQ, submitInquiry, productCard, categoryCard, certCard,
     icons:I, reobserve:initObservers, applyLang };
 
   if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded',boot);
