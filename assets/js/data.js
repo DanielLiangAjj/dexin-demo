@@ -33,7 +33,7 @@ window.DX = {
 
   /* ---- inquiry form: free access key from web3forms.com (create with
      dexintc@163.com, paste between the quotes). Empty = mailto fallback. ---- */
-  forms: { web3forms_key: "" },
+  forms: { web3forms_key: "38d59918-35c2-4adf-9893-f8d1058cb28c" },
 
   /* ---- headline numbers (real company figures) ---- */
   stats: [
