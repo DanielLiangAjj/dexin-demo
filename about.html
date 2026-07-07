@@ -20,7 +20,7 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta name="theme-color" content="#0b2545">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://hm.baidu.com https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://hm.baidu.com https://danielajj.goatcounter.com; font-src 'self'; media-src 'self'; connect-src 'self' https://api.web3forms.com https://hm.baidu.com https://danielajj.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
 <link rel="icon" type="image/jpeg" href="assets/img/site/logo_square.jpg">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -164,5 +164,16 @@ window.DXPAGE = function(){
 };
 </script>
 <script src="assets/js/components.js"></script>
+<!-- analytics: Baidu Tongji (CN) + GoatCounter (intl) -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5a7618a2dc07c5ae6a50411ba4df45e3";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script data-goatcounter="https://danielajj.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
