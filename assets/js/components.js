@@ -164,26 +164,39 @@
     const yr=document.getElementById('yr'); if(yr) yr.textContent='2026';
   }
 
-  /* ---------- inquiry submission: Web3Forms, mailto fallback ---------- */
+  /* ---------- inquiry submission: Web3Forms fetch, then real form-POST
+     fallback (passes bot challenges that block fetch), mailto as last resort ---------- */
   async function submitInquiry(f){
     const key=(DX.forms&&DX.forms.web3forms_key)||'';
     const subject='Website inquiry — szdexintc.com'+(f.product?' — '+f.product:'');
-    if(key){
-      try{
-        const r=await fetch('https://api.web3forms.com/submit',{method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body:JSON.stringify({access_key:key,subject:subject,from_name:f.name,
-            name:f.name,email:f.email,company:f.company,phone:f.phone,
-            product:f.product,message:f.message})});
-        const res=await r.json();
-        if(res.success) return true;
-      }catch(err){ console.error(err); }
+    if(!key){
+      const body=['Name: '+f.name,'Company: '+f.company,'Email: '+f.email,
+        'Phone: '+f.phone,'Product: '+f.product,'','Message:',f.message].join('\n');
+      location.href='mailto:'+DX.contact.email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+      return true;
     }
-    // no key or request failed: open the visitor's mail client pre-filled
-    const body=['Name: '+f.name,'Company: '+f.company,'Email: '+f.email,
-      'Phone: '+f.phone,'Product: '+f.product,'','Message:',f.message].join('\n');
-    location.href='mailto:'+DX.contact.email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-    return true;
+    try{
+      const r=await fetch('https://api.web3forms.com/submit',{method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({access_key:key,subject:subject,from_name:f.name,
+          name:f.name,email:f.email,company:f.company,phone:f.phone,
+          product:f.product,message:f.message})});
+      const res=await r.json();
+      if(res.success) return true;
+    }catch(err){ console.error(err); }
+    // fetch blocked (e.g. bot challenge): submit as a real top-level form POST —
+    // the browser can clear the challenge, then Web3Forms redirects to /thanks.html
+    const fm=document.createElement('form');
+    fm.method='POST'; fm.action='https://api.web3forms.com/submit'; fm.style.display='none';
+    const fields={access_key:key, subject:subject, from_name:f.name, name:f.name,
+      email:f.email, company:f.company, phone:f.phone, product:f.product,
+      message:f.message, redirect:'https://szdexintc.com/thanks.html'};
+    for(const k in fields){
+      const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=fields[k]||'';
+      fm.appendChild(i);
+    }
+    document.body.appendChild(fm); fm.submit();
+    return 'nav';
   }
 
   /* ---------- RFQ / sample modal ---------- */
@@ -228,7 +241,8 @@
       if(!fm.checkValidity()){fm.reportValidity();return;}
       const btn=fm.querySelector('button[type=submit]'); if(btn) btn.disabled=true;
       const v=n=>{const el=fm.querySelector('[name='+n+']');return el?el.value.trim():'';};
-      await submitInquiry({product:v('product'),name:v('name'),company:v('company'),email:v('email'),phone:v('phone'),message:v('message')});
+      const ok=await submitInquiry({product:v('product'),name:v('name'),company:v('company'),email:v('email'),phone:v('phone'),message:v('message')});
+      if(ok==='nav') return;   // page is navigating to Web3Forms
       if(btn) btn.disabled=false;
       fm.style.display='none';
       wrap.querySelector('.form-ok').classList.add('show');

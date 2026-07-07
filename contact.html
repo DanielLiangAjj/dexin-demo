@@ -20,7 +20,7 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta name="theme-color" content="#0b2545">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://hm.baidu.com https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://hm.baidu.com https://danielajj.goatcounter.com; font-src 'self'; media-src 'self'; connect-src 'self' https://api.web3forms.com https://hm.baidu.com https://danielajj.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://hm.baidu.com https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://hm.baidu.com https://danielajj.goatcounter.com; font-src 'self'; media-src 'self'; connect-src 'self' https://api.web3forms.com https://hm.baidu.com https://danielajj.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src 'none'; upgrade-insecure-requests">
 <link rel="icon" type="image/jpeg" href="assets/img/site/logo_square.jpg">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -193,7 +193,8 @@ window.DXPAGE = function(){
     if(!form.checkValidity()){ form.reportValidity(); return; }
     const btn=form.querySelector('button[type=submit]'); if(btn) btn.disabled=true;
     const g=id=>{const el=document.getElementById(id);return el?el.value.trim():'';};
-    await U.submitInquiry({name:g('f-name'),company:g('f-company'),email:g('f-email'),phone:g('f-phone'),product:g('f-product'),message:g('f-message')});
+    const ok=await U.submitInquiry({name:g('f-name'),company:g('f-company'),email:g('f-email'),phone:g('f-phone'),product:g('f-product'),message:g('f-message')});
+    if(ok==='nav') return;   // page is navigating to Web3Forms
     form.innerHTML = `
       <div class="form-ok show" style="padding:18px 0">
         <div class="ck">${U.svg('check',2.4)}</div>
