@@ -308,24 +308,28 @@ window.DX = {
   industries: [
     {
       slug: "iron", en: "Iron & Ductile-Iron Foundries", zh: "铸铁与球墨铸铁", icon: "iron",
+      img: "assets/img/site/melt_skimming.jpg",
       desc_en: "SiC filtration, insulating risers and core support for grey, ductile and malleable iron casting.",
       desc_zh: "用于灰铁、球墨与可锻铸铁的碳化硅过滤、保温冒口与芯撑。",
       pids: [41, 55, 71, 82]
     },
     {
       slug: "steel", en: "Steel & Investment Casting", zh: "铸钢与精密铸造", icon: "steel",
+      img: "assets/img/site/melt_furnace.jpg",
       desc_en: "High-temperature zirconia filtration, feeding and core support for carbon, stainless and alloy steel.",
       desc_zh: "用于碳钢、不锈钢及合金钢的高温氧化锆过滤、补缩与芯撑。",
       pids: [44, 71, 82]
     },
     {
       slug: "nonferrous", en: "Aluminium & Copper Casting", zh: "铝与铜合金铸造", icon: "alu",
+      img: "assets/img/site/castings_machined.jpg", pos: "center 72%",
       desc_en: "Alumina and mullite filtration plus insulating feeders for aluminium, copper and bronze.",
       desc_zh: "用于铝、铜及青铜的氧化铝与莫来石过滤及保温冒口。",
       pids: [43, 55, 71]
     },
     {
       slug: "thermal", en: "Furnaces, Kilns & Heat Treatment", zh: "工业炉窑与热处理", icon: "furnace",
+      img: "assets/img/site/factory_kiln.jpg",
       desc_en: "Graded ceramic insulation boards from 1000 °C to 1500 °C for energy-saving furnace and kiln linings.",
       desc_zh: "1000℃至1500℃分级陶瓷隔热板，用于节能炉窑衬里。",
       pids: [91, 92, 93]
@@ -348,19 +352,19 @@ window.DX = {
       en_t: "35% fewer inclusion rejects at an iron foundry", zh_t: "某铸铁厂夹杂废品下降35%",
       en: "After switching to SiC foam filters in the gating system, a ductile-iron foundry cut inclusion-related rejects by over a third and improved machined-surface quality.",
       zh: "在浇注系统中改用碳化硅泡沫过滤器后，一家球墨铸铁厂的夹杂类废品下降超过三分之一，并改善了机加工表面质量。",
-      pid: 41
+      pid: 41, img: "assets/img/site/foundry_sparks.jpg"
     },
     {
       en_t: "Higher yield with filter-riser feeders", zh_t: "一体冒口提升成品率",
       en: "Integrated filter-riser feeders kept feed metal liquid longer while cleaning the pour, allowing smaller risers and raising casting yield by an estimated 8–12%.",
       zh: "过滤保温一体冒口在净化金属液的同时延长补缩液态时间，可使用更小冒口，铸件成品率提升约8–12%。",
-      pid: 71
+      pid: 71, img: "assets/img/site/hand_pour.jpg", pos: "center 62%"
     },
     {
       en_t: "Energy savings on a heat-treatment furnace", zh_t: "热处理炉节能改造",
       en: "Re-lining a heat-treatment furnace with graded ceramic insulation boards lowered shell temperature and measurably reduced gas consumption.",
       zh: "采用分级陶瓷隔热板对热处理炉重新做衬里后，炉壳温度下降，燃气消耗明显降低。",
-      pid: 91
+      pid: 91, img: "assets/img/site/factory_kiln.jpg"
     }
   ]
 };

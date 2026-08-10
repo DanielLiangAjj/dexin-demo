@@ -47,9 +47,24 @@ All product names, photos, spec tables, the company profile and the certificate 
 
 The hero uses `assets/video/factory.mp4` (the clip supplied by the client, 640×368). To upgrade, replace that file (keep it short, muted, ideally ≥1080p) — no code change needed. The poster is `assets/img/site/factory_building.jpg`.
 
-## Connect the inquiry / RFQ form
+## Inquiry / RFQ form
 
-The form (modal + contact page) validates and shows a success state but is **not connected**. To receive submissions with no server, point it at [Formspree](https://formspree.io) or [Web3Forms](https://web3forms.com). The WhatsApp buttons already deep-link to `wa.me/8613776067838`.
+Connected to **Web3Forms** (key in `assets/js/data.js` → `forms.web3forms_key`, delivers to dexintc@163.com), with a plain form-POST fallback when fetch is blocked. The WhatsApp buttons deep-link to `wa.me/8613776067838`.
+
+## SEO / AI-discoverability (GEO)
+
+On-page: bilingual titles/descriptions/keywords per page, canonical URLs on **szdexintc.com** (CNAME), Open Graph cards, JSON-LD (Organization + WebSite + FAQ on the home page, per-product Product schema on detail pages), `sitemap.xml` with all product URLs, `robots.txt`, `llms.txt` for AI crawlers, Baidu-friendly metas, CSP security headers, Baidu Tongji + GoatCounter analytics.
+
+**Off-page — the part that actually gets the company recommended by AI assistants / search engines** (no code involved):
+1. Point the real DNS at this site (CNAME file is set to `szdexintc.com`) and verify + submit the sitemap in **Baidu 站长平台**, **Bing Webmaster** and **Google Search Console**.
+2. Build third-party authority: refresh listings on Alibaba International / Made-in-China / 1688, and ask the Jiangsu Foundry Association to link the site from its member directory. AI assistants answer "best X in China" questions from these authoritative third-party sources — not from a company's own site — so this step matters more than any on-page tag.
+3. Expect months, not days: AI models cite what the established web says about the company.
+
+## Performance in mainland China
+
+- **No Google Fonts / zero third-party render-blocking requests** — Sora/Inter are self-hosted woff2 (`assets/fonts/`), Chinese text uses system fonts (PingFang SC / Microsoft YaHei), the standard on Chinese sites.
+- All photography recompressed (progressive JPEG, ≤1600 px, ~100–320 KB per image).
+- Remaining lever is hosting: GitHub Pages is slow/unreliable from mainland China. When DNS for szdexintc.com moves to a China-hosted server (with ICP filing), copy these same files to its web root — no code changes needed.
 
 ## Editing content
 

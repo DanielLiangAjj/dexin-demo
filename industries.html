@@ -30,7 +30,7 @@
 
 <main>
 <!-- ================= PAGE HERO ================= -->
-<section class="page-hero"><div class="container inner">
+<section class="page-hero" style="background:linear-gradient(rgba(7,20,41,.78),rgba(9,26,52,.90)),url('assets/img/site/foundry_hall.jpg') center/cover"><div class="container inner">
   <div class="crumbs">
     <a href="index.html"><span data-en>Home</span><span data-zh>首页</span></a><span>/</span>
     <span data-en>Industries</span><span data-zh>应用行业</span>
@@ -76,15 +76,17 @@ window.DXPAGE = function(){
     const grid = prods.length
       ? `<div class="cards c3">${prods.map(p => U.productCard(p)).join('')}</div>`
       : '';
+    const flip = i % 2 === 1;
     return `
       <section class="section${soft ? ' soft' : ''}" id="${ind.slug}">
         <div class="container">
-          <div class="section-head reveal" style="display:flex;align-items:center;gap:18px;max-width:none">
-            <span class="ico" style="width:58px;height:58px;border-radius:14px;background:var(--ink);color:var(--molten);display:grid;place-items:center;flex:0 0 auto">${U.svg(ind.icon)}</span>
-            <div>
+          <div class="ind-intro reveal${flip ? ' flip' : ''}">
+            <div class="ind-intro-txt">
+              <span class="ico" style="width:58px;height:58px;border-radius:14px;background:var(--ink);color:var(--molten);display:grid;place-items:center;margin-bottom:16px">${U.svg(ind.icon)}</span>
               <h2 style="font-size:clamp(24px,3vw,38px);margin:0"><span data-en>${ind.en}</span><span data-zh>${ind.zh}</span></h2>
-              <p style="margin-top:8px"><span data-en>${ind.desc_en}</span><span data-zh>${ind.desc_zh}</span></p>
+              <p style="margin-top:10px"><span data-en>${ind.desc_en}</span><span data-zh>${ind.desc_zh}</span></p>
             </div>
+            <div class="ind-intro-shot"><img src="${ind.img}" alt="${ind.en}" loading="lazy" style="object-position:${ind.pos||'center'}"></div>
           </div>
           ${grid}
         </div>

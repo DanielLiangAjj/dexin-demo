@@ -262,6 +262,21 @@ ul{margin:0;padding:0;list-style:none}
 .ind .ico svg{width:24px;height:24px}
 .ind h3{font-size:17px}
 .ind p{color:var(--muted);font-size:14px;margin-top:5px}
+/* photo variant — real application photography */
+.ind-grid{grid-template-columns:repeat(4,1fr)}
+.ind.ind-photo{flex-direction:column;gap:0;padding:0;overflow:hidden}
+.ind.ind-photo .shot{position:relative;padding-top:62.5%;background:#06122a;display:block;overflow:hidden;flex:0 0 auto;width:100%}
+.ind.ind-photo .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.ind.ind-photo:hover .shot img{transform:scale(1.06)}
+.ind.ind-photo .shot .ico{position:absolute;left:14px;bottom:-16px;box-shadow:var(--shadow);z-index:2}
+.ind.ind-photo .body{padding:26px 20px 20px}
+/* industries page — text + photo intro per segment */
+.ind-intro{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;margin-bottom:40px}
+.ind-intro.flip .ind-intro-txt{order:2}
+.ind-intro.flip .ind-intro-shot{order:1}
+.ind-intro-shot{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);padding-top:56.25%;background:#06122a}
+.ind-intro-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media(max-width:860px){.ind-intro{grid-template-columns:1fr;gap:24px}.ind-intro.flip .ind-intro-txt{order:1}.ind-intro.flip .ind-intro-shot{order:2}}
 
 /* ---------- Certs ---------- */
 .cert-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
