@@ -120,7 +120,7 @@ html[lang="zh"] .h2,html[lang="ar"] .h2{font-size:clamp(32px,3.8vw,58px)}
   text-decoration-thickness:2px;text-decoration-color:currentColor;transition:color var(--t-hover) ease}
 .link svg{width:16px;height:16px;transition:transform var(--t-ui) var(--ease-out)}
 @media (hover:hover) and (pointer:fine){.link:hover svg{transform:translateX(4px)}}
-html[dir="rtl"] .link svg,html[dir="rtl"] .btn svg.arrow{transform:scaleX(-1)}
+html[dir="rtl"] .link svg,html[dir="rtl"] .btn svg.arrow,html[dir="rtl"] .rail-btn svg.arrow{transform:scaleX(-1)}
 
 /* ---------- Header ---------- */
 .site-header{position:sticky;top:0;z-index:300;background:var(--navy);color:#fff}
@@ -198,7 +198,7 @@ html[dir="rtl"] .mobile-nav{transform:translateX(-100%)}
 
 /* ---------- The rail ---------- */
 .rail{margin-top:clamp(28px,4.5vh,52px);position:relative}
-.rail-track{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);padding-inline:var(--gutter) 0;
+.rail-track{position:relative;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);padding-inline:var(--gutter) 0;
   scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;background:var(--navy-2)}
 .rail-track::after{content:"";flex:0 0 var(--gutter)}
 .rail-track::-webkit-scrollbar{display:none}
@@ -207,7 +207,7 @@ html[dir="rtl"] .mobile-nav{transform:translateX(-100%)}
 @media (max-width:560px){.frame{flex-basis:80vw}}
 .frame .fact{transition:opacity 200ms ease}
 .frame .window{transition:opacity 200ms ease}
-@media (prefers-reduced-motion:no-preference){.frame.cut .window,.frame.cut .fact{opacity:0}}
+@media (prefers-reduced-motion:no-preference){.frame.cut:not(.is-on) .window,.frame.cut .fact{opacity:0}}
 .frame::before,.frame::after{content:"";position:absolute;left:0;right:0;height:20px;background:var(--perf) repeat-x 0 0/28px 20px}
 .frame::before{top:3px}
 .frame::after{bottom:3px}
@@ -250,6 +250,14 @@ html[dir="rtl"] .mobile-nav{transform:translateX(-100%)}
 .rail-now{font-size:var(--fs-body);color:var(--on-navy-soft);min-width:0}
 .rail-now strong{color:#fff;font-weight:600}
 @media (max-width:640px){.rail-now{display:none}.rail-steps{margin-inline-start:0;width:100%}.rail-ctl{flex-wrap:wrap;gap:10px}}
+/* Scroll-driven mode: JS adds .pinned when motion is allowed and the stage fits the screen.
+   The stage sticks for --run px of page scroll, and that scroll moves the line one station at a time. */
+.rail.pinned{height:calc(var(--stage-h) + var(--run))}
+.rail.pinned .rail-stage{position:sticky;top:var(--stage-top)}
+.rail.pinned .rail-track{overflow-x:hidden;scroll-snap-type:none;touch-action:pan-y}
+.rail.pinned .frame{flex-basis:min(clamp(272px,32vw,520px),calc(100svh - 330px))}
+@media (max-width:560px){.rail.pinned .frame{flex-basis:min(80vw,calc(100svh - 400px))}}
+.rail.pinned [data-rail="play"]{display:none}
 .hero + .catalog,.hero{position:relative}
 .hero-tail{height:clamp(56px,7vw,104px)}
 

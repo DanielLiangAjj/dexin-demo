@@ -427,9 +427,12 @@
     });
   }
 
-  /* ---------- the production rail ---------- */
+  /* ---------- the production rail ----------
+     Scroll-driven when motion is allowed and the stage fits the screen: the stage pins and the
+     page scroll moves the line one station at a time. Otherwise a swipeable strip that autoplays. */
   function initRail(rail){
     if(!rail) return;
+    const stage=rail.querySelector('.rail-stage')||rail;
     const track=rail.querySelector('.rail-track');
     const frames=[...rail.querySelectorAll('.frame')];
     const steps=rail.querySelector('.rail-steps');
@@ -437,17 +440,20 @@
     const playBtn=rail.querySelector('[data-rail="play"]');
     const prevBtn=rail.querySelector('[data-rail="prev"]');
     const nextBtn=rail.querySelector('[data-rail="next"]');
+    const header=document.getElementById('site-header');
     if(!track||!frames.length) return;
     frames.forEach((f,i)=>f.style.setProperty('--f',Math.min(i,6)));
-    let idx=0, timer=null, playing=!reduced, visible=true, hovering=false, programmatic=0;
-    const DWELL=3600;
+    let idx=0, timer=null, playing=false, held=reduced, visible=true, hovering=false, programmatic=0;
+    let pinned=false, geo=null, lastW=0, lastH=0, aim=-1, aimAt=0;
+    const DWELL=3600, last=frames.length-1;
+    const isRtl=()=>document.documentElement.dir==='rtl';
 
     steps.innerHTML=frames.map((f,i)=>{
       const name=f.querySelector('h3 [data-en]')?.textContent||('Station '+(i+1));
       return `<button type="button" aria-label="${esc(name)}"><i></i></button>`;
     }).join('');
     const stepBtns=[...steps.children];
-    stepBtns.forEach((b,i)=>b.addEventListener('click',()=>{ go(i,true); stop(); }));
+    stepBtns.forEach((b,i)=>b.addEventListener('click',()=>{ stop(); go(i,true); }));
 
     function mark(i){
       idx=i;
@@ -455,23 +461,71 @@
       stepBtns.forEach((b,k)=>{ b.classList.toggle('on',k===i); b.classList.toggle('done',k<i); b.setAttribute('aria-current',k===i?'step':'false'); });
       if(now){ const h=frames[i].querySelector('h3'); now.innerHTML=h?h.innerHTML:''; applyLang(now); }
       const v=frames[i].querySelector('video'); frames.forEach(f=>{ const vv=f.querySelector('video'); if(vv && vv!==v && !vv.paused) vv.pause(); });
-      if(v && playing && !reduced){ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }
+      if(v && !reduced && (pinned||playing)){ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }
     }
+
+    // pinned mode: measure the stage, size the scroll run, and record where each station sits on the track
+    function layout(force){
+      const W=innerWidth, H=innerHeight;
+      if(!force && W===lastW && Math.abs(H-lastH)<160) return; // phone toolbars resize the viewport while scrolling
+      lastW=W; lastH=H;
+      rail.classList.add('pinned');
+      const hh=header?header.offsetHeight:0, sh=stage.offsetHeight;
+      if(reduced || last<1 || sh>H-hh-8 || frames[0].offsetWidth<220){
+        rail.classList.remove('pinned'); pinned=false; geo=null;
+        if(!held && !playing) start(); else setPlayIcon();
+        return;
+      }
+      if(playing){ playing=false; clearInterval(timer); }
+      const step=Math.round(Math.min(460,Math.max(260,H*0.42)));
+      const lead=Math.round(step*0.2), tail=Math.round(step*0.5);
+      const top=Math.round(hh+Math.max(0,(H-hh-sh)/2));
+      rail.style.setProperty('--stage-h',sh+'px');
+      rail.style.setProperty('--run',(lead+step*last+tail)+'px');
+      rail.style.setProperty('--stage-top',top+'px');
+      // the line travels evenly, so the lit frame walks from the first slot to the last as it goes
+      const max=track.scrollWidth-track.clientWidth;
+      const offs=frames.map((f,i)=>max*i/last);
+      geo={step,lead,top,sh,offs,rtl:isRtl()}; pinned=true;
+      update();
+    }
+    // page scroll -> position on the line; each station eases in and settles, but the line never stalls
+    function update(){
+      if(!pinned||!geo) return;
+      const x=Math.max(0,Math.min(last,(geo.top-rail.getBoundingClientRect().top-geo.lead)/geo.step));
+      const i=Math.min(Math.floor(x),last-1), t=x-i;
+      const e=0.35*t+0.65*t*t*(3-2*t);
+      const off=geo.offs[i]+(geo.offs[i+1]-geo.offs[i])*e;
+      const sl=geo.rtl?-off:off;
+      if(Math.abs(track.scrollLeft-sl)>0.5) track.scrollLeft=sl;
+      const on=e<0.5?i:i+1;
+      if(on!==idx) mark(on);
+    }
+    function stationY(i){ return rail.getBoundingClientRect().top+scrollY-geo.top+geo.lead+i*geo.step; }
+
     function offsetFor(f){
       const pad=parseFloat(getComputedStyle(track).scrollPaddingInlineStart)||0;
       const tr=track.getBoundingClientRect(), fr=f.getBoundingClientRect();
-      return document.documentElement.dir==='rtl' ? (fr.right-(tr.right-pad)) : (fr.left-(tr.left+pad));
+      return isRtl() ? (fr.right-(tr.right-pad)) : (fr.left-(tr.left+pad));
     }
     function go(i,user){
+      if(pinned){
+        const from=(aim>=0 && Date.now()-aimAt<700) ? aim : idx; // repeated presses keep counting from the target
+        i=Math.max(0,Math.min(last,i-idx+from));
+        aim=i; aimAt=Date.now();
+        window.scrollTo({top:stationY(i),behavior:reduced?'auto':'smooth'});
+        if(user) track.focus({preventScroll:true});
+        return;
+      }
       i=(i+frames.length)%frames.length;
       programmatic=Date.now();
       track.scrollBy({left:offsetFor(frames[i]),behavior:(reduced?'auto':'smooth')});
       mark(i);
       if(user) track.focus({preventScroll:true});
     }
-    function tick(){ if(playing && visible && !hovering && !document.hidden) go(idx+1); }
-    function start(){ playing=true; clearInterval(timer); timer=setInterval(tick,DWELL); setPlayIcon(); }
-    function stop(){ playing=false; clearInterval(timer); setPlayIcon(); }
+    function tick(){ if(playing && !pinned && visible && !hovering && !document.hidden) go(idx+1); }
+    function start(){ held=false; playing=true; clearInterval(timer); timer=setInterval(tick,DWELL); setPlayIcon(); }
+    function stop(){ held=true; playing=false; clearInterval(timer); setPlayIcon(); }
     function setPlayIcon(){
       if(!playBtn) return;
       playBtn.innerHTML=svg(playing?'pause':'play');
@@ -482,10 +536,10 @@
     prevBtn && prevBtn.addEventListener('click',()=>{ stop(); go(idx-1,true); });
     nextBtn && nextBtn.addEventListener('click',()=>{ stop(); go(idx+1,true); });
 
-    // user scrolling (drag, swipe, wheel, keys) picks the nearest frame and holds autoplay
+    // strip mode: user scrolling (drag, swipe, wheel, keys) picks the nearest frame and holds autoplay
     let raf=0;
     track.addEventListener('scroll',()=>{
-      if(raf) return;
+      if(pinned||raf) return;
       raf=requestAnimationFrame(()=>{
         raf=0;
         let best=0, bd=Infinity;
@@ -493,9 +547,22 @@
         if(best!==idx) mark(best);
       });
     },{passive:true});
-    ['pointerdown','wheel','touchstart'].forEach(ev=>track.addEventListener(ev,()=>{ if(Date.now()-programmatic>60) stop(); },{passive:true}));
+    ['pointerdown','wheel','touchstart'].forEach(ev=>track.addEventListener(ev,()=>{ if(!pinned && Date.now()-programmatic>60) stop(); },{passive:true}));
+    // pinned mode: a sideways trackpad swipe scrolls the page, a sideways thumb swipe moves one station
+    track.addEventListener('wheel',e=>{
+      if(!pinned || Math.abs(e.deltaX)<=Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      window.scrollBy({top:e.deltaX*(e.deltaMode===1?16:1)*(isRtl()?-1:1),behavior:'instant'});
+    },{passive:false});
+    let tx=0, ty=0;
+    track.addEventListener('touchstart',e=>{ const p=e.touches[0]; tx=p.clientX; ty=p.clientY; },{passive:true});
+    track.addEventListener('touchend',e=>{
+      if(!pinned) return;
+      const p=e.changedTouches[0], dx=p.clientX-tx, dy=p.clientY-ty;
+      if(Math.abs(dx)>40 && Math.abs(dx)>1.5*Math.abs(dy)) go(idx+((dx<0)!==isRtl()?1:-1),false);
+    },{passive:true});
     track.addEventListener('keydown',e=>{
-      const rtl=document.documentElement.dir==='rtl';
+      const rtl=isRtl();
       if(e.key==='ArrowRight'){ e.preventDefault(); stop(); go(idx+(rtl?-1:1),true); }
       if(e.key==='ArrowLeft'){ e.preventDefault(); stop(); go(idx+(rtl?1:-1),true); }
     });
@@ -505,14 +572,18 @@
     rail.addEventListener('focusout',e=>{ if(!rail.contains(e.relatedTarget)) hovering=false; });
     if('IntersectionObserver' in window){
       new IntersectionObserver(es=>{ visible=es[0].isIntersecting; },{threshold:0.35}).observe(rail);
-    }
-    if('IntersectionObserver' in window){
       const cutIO=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('cut', e.intersectionRatio>0 && e.intersectionRatio<0.97)),{root:track,threshold:[0,0.97,1]});
       frames.forEach(f=>cutIO.observe(f));
     }
-    document.addEventListener('dx:lang',()=>mark(idx));
+    addEventListener('scroll',update,{passive:true});
+    let rraf=0;
+    addEventListener('resize',()=>{ if(!rraf) rraf=requestAnimationFrame(()=>{ rraf=0; layout(false); }); });
+    if('ResizeObserver' in window) new ResizeObserver(()=>{ if(pinned && geo && Math.abs(stage.offsetHeight-geo.sh)>1) layout(true); }).observe(stage);
+    document.fonts && document.fonts.ready.then(()=>layout(true));
+    addEventListener('load',()=>layout(true));
+    document.addEventListener('dx:lang',()=>{ mark(idx); layout(true); });
     mark(0);
-    if(playing) start(); else setPlayIcon();
+    layout(true);
   }
 
   /* ---------- boot ---------- */

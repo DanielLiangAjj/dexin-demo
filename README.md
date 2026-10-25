@@ -3,7 +3,7 @@
 A modern, bilingual (English / 中文) marketing site for **Suzhou Dexin Advanced Ceramics Co., Ltd.**
 Built as static HTML/CSS/JS — no build step, hosts anywhere.
 
-Design direction (Oct 2026 redesign): **Production rail**. The home page opens on one film-strip rail of square frames that plays the whole making of a filter, from raw materials and the coating line through the 1,600 °C shuttle kilns, the lab and the cartons to shipment and the customer's pour, using Dexin's own photos and factory video. The visitor can also drag it or step through it. The square filter tile is the one motif (frames, photo masks, buttons, bullets, the block-built footer wordmark). Theme: navy + white with blue only on actions, square corners, one typeface (Archivo, condensed for headings).
+Design direction (Oct 2026 redesign): **Production rail**. The home page opens on one film-strip rail of square frames that plays the whole making of a filter, from raw materials and the coating line through the 1,600 °C shuttle kilns, the lab and the cartons to shipment and the customer's pour, using Dexin's own photos and factory video. It is scroll-driven: the rail pins to the screen and the page scroll moves it one station at a time (like Apple's product pages); the arrows, station squares and arrow keys jump to a station. With reduced motion, or on a screen too short to hold it, it falls back to a swipeable strip. The square filter tile is the one motif (frames, photo masks, buttons, bullets, the block-built footer wordmark). Theme: navy + white with blue only on actions, square corners, one typeface (Archivo, condensed for headings).
 
 ## Run it locally
 
@@ -17,7 +17,7 @@ python3 -m http.server 8137
 
 | Page | File | Notes |
 |------|------|-------|
-| Home | `index.html` | **Production rail** (auto-playing, draggable, keyboard and button controls), the three product lines as a photo-bullet catalogue, a "which filter for your metal?" picker, industries, certificate board, case studies, inline quote form |
+| Home | `index.html` | **Production rail** (pinned and driven by page scroll; falls back to a swipeable, auto-playing strip), the three product lines as a photo-bullet catalogue, a "which filter for your metal?" picker, industries, certificate board, case studies, inline quote form |
 | Products | `products.html` | Filter by product line (Foam Filters / Insulation / Casting Auxiliaries); browse by industry |
 | Product detail | `product.html?id=44` | Full **spec table** (real values), applications, Request Quote / Sample, related products |
 | Industries | `industries.html` | Products mapped to iron, steel, non-ferrous and furnace/kiln segments |
