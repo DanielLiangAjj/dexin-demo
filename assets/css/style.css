@@ -339,7 +339,7 @@ html[lang="zh"] .metal,html[lang="ar"] .metal{font-stretch:100%;text-transform:n
 @media (hover:hover) and (pointer:fine){.tile:not(.head):hover .scan{transform:scale(1.06) rotate(-1.5deg)}}
 @media (max-width:900px){.board{grid-template-columns:1fr 1fr;gap:6px}.tile.head{grid-column:1/-1;min-height:160px}.tile{padding:16px;min-height:200px}}
 
-/* ---------- Case folders (sticky stack) ---------- */
+/* ---------- Case folders (stacked, tabbed) ---------- */
 .folders{position:relative}
 .folder{position:relative;margin-top:84px;background:var(--navy-2);color:#fff}
 .folder:nth-child(2){background:var(--navy-3)}
@@ -409,6 +409,7 @@ html[dir="rtl"] .folder .tab{clip-path:polygon(18px 0,100% 0,100% 100%,0 100%)}
 .mark-blocks span{flex:1 1 0;aspect-ratio:1/1;display:flex;align-items:flex-end;justify-content:flex-start;padding:0 0 4px 8px;overflow:hidden;
   background:var(--navy-3);color:var(--navy-deep);font-stretch:62%;font-weight:900;line-height:.74;font-size:clamp(56px,14vw,214px)}
 .mark-blocks span:nth-child(odd){background:#fff}
+.mark-blocks span:nth-child(even){color:#fff}
 .mark-blocks span.zh{font-stretch:100%;font-weight:800;font-size:clamp(36px,9vw,140px);line-height:1;padding-bottom:10px}
 .foot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:56px}
 .foot-grid h4{font-size:var(--fs-small);font-weight:600;color:var(--on-navy-soft);margin-bottom:14px}
