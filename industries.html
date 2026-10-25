@@ -22,87 +22,55 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://hm.baidu.com https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://hm.baidu.com https://danielajj.goatcounter.com; font-src 'self'; media-src 'self'; connect-src 'self' https://api.web3forms.com https://hm.baidu.com https://danielajj.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src 'none'; upgrade-insecure-requests">
 <link rel="icon" type="image/jpeg" href="assets/img/site/logo_square.jpg">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header id="site-header" data-variant="solid"></header>
-
+<header id="site-header"></header>
 <main>
-<!-- ================= PAGE HERO ================= -->
-<section class="page-hero" style="background:linear-gradient(rgba(7,20,41,.78),rgba(9,26,52,.90)),url('assets/img/site/foundry_hall.jpg') center/cover"><div class="container inner">
-  <div class="crumbs">
-    <a href="index.html"><span data-en>Home</span><span data-zh>首页</span></a><span>/</span>
-    <span data-en>Industries</span><span data-zh>应用行业</span>
-  </div>
-  <span class="eyebrow"><span data-en>Applications</span><span data-zh>应用行业</span></span>
-  <h1><span data-en>Industries we serve</span><span data-zh>服务行业</span></h1>
-  <p><span data-en>Tell us what you cast or build — find the products that fit.</span><span data-zh>告诉我们您要铸造或制造什么——找到适配的产品。</span></p>
-</div></section>
+<section class="page-hero g-navy" aria-labelledby="ph-title">
+  <div class="wrap ph-grid">
+    <div>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html"><span data-en>Home</span><span data-zh>首页</span></a><span aria-hidden="true">/</span><span data-en>Industries</span><span data-zh>应用行业</span></nav>
+      <h1 id="ph-title" class="cap"><span data-en>Industries we serve</span><span data-zh>服务行业</span></h1>
+      <p class="lead"><span data-en>Tell us what you cast or build — find the products that fit.</span><span data-zh>告诉我们您要铸造或制造什么——找到适配的产品。</span></p>
 
-<!-- ================= INDUSTRY BLOCKS ================= -->
-<div id="industryWrap"></div>
-
-<!-- ================= CTA ================= -->
-<section class="cta-band">
-  <div class="container inner">
-    <div class="reveal">
-      <h2><span data-en>Not sure which material fits your process?</span><span data-zh>不确定哪种材料适合您的工艺？</span></h2>
-      <p><span data-en>Send your metal, temperature and application — our engineers will recommend the right filter, insulation board or casting aid.</span><span data-zh>发送您的金属种类、温度与应用场景——我们的工程师将为您推荐合适的过滤器、隔热板或铸造辅材。</span></p>
+      <div class="hero-actions"><a class="btn" href="contact.html#quote" data-rfq data-rfq-type="quote"><span data-en>Request a Quote</span><span data-zh>获取报价</span></a></div>
     </div>
-    <div class="hero-cta reveal d1">
-      <a class="btn btn-primary" href="#" data-rfq data-rfq-type="quote"><span data-en>Request a Quote</span><span data-zh>获取报价</span></a>
-      <a class="btn btn-on-dark" href="#" data-rfq data-rfq-type="sample"><span data-en>Request a Sample</span><span data-zh>申请样品</span></a>
-    </div>
+    <div class="ph-frame"><div class="frame is-on"><span class="flag" aria-hidden="true"></span>
+      <div class="shot"><img src="assets/img/site/foundry_hall.jpg" alt="A foundry hall" width="1400" height="1050"></div>
+      <div class="window"><h2 class="h3"><span data-en>Four industries</span><span data-zh>四大行业</span></h2><p><span data-en>Iron, steel, aluminium and copper foundries, and furnace builders.</span><span data-zh>铸铁、铸钢、铝铜铸造及工业炉窑。</span></p></div>
+    </div></div>
   </div>
 </section>
+<div id="industryWrap"></div>
+<section class="band g-white" id="quote" aria-labelledby="quote-title">
+  <div class="wrap"><div data-coupon></div></div>
+</section>
 </main>
-
 <footer id="site-footer"></footer>
-
 <script src="assets/js/data.js"></script>
 <script src="assets/js/i18n.js"></script>
 <script>
 window.DXPAGE = function(){
-  const U = window.DXUI, D = window.DX;
+  const U = window.DXUI, D = window.DX, bi = U.bi;
   const wrap = document.getElementById('industryWrap');
-  if(!wrap) return;
-
   wrap.innerHTML = D.industries.map((ind, i) => {
-    const soft = i % 2 === 1;
-    const prods = (ind.pids || [])
-      .map(id => D.products.find(p => p.id === id))
-      .filter(Boolean);
-    const grid = prods.length
-      ? `<div class="cards c3">${prods.map(p => U.productCard(p)).join('')}</div>`
-      : '';
-    const flip = i % 2 === 1;
-    return `
-      <section class="section${soft ? ' soft' : ''}" id="${ind.slug}">
-        <div class="container">
-          <div class="ind-intro reveal${flip ? ' flip' : ''}">
-            <div class="ind-intro-txt">
-              <span class="ico" style="width:58px;height:58px;border-radius:14px;background:var(--ink);color:var(--molten);display:grid;place-items:center;margin-bottom:16px">${U.svg(ind.icon)}</span>
-              <h2 style="font-size:clamp(24px,3vw,38px);margin:0"><span data-en>${ind.en}</span><span data-zh>${ind.zh}</span></h2>
-              <p style="margin-top:10px"><span data-en>${ind.desc_en}</span><span data-zh>${ind.desc_zh}</span></p>
-            </div>
-            <div class="ind-intro-shot"><img src="${ind.img}" alt="${ind.en}" loading="lazy" style="object-position:${ind.pos||'center'}"></div>
-          </div>
-          ${grid}
+    const prods = (ind.pids || []).map(id => D.products.find(p => p.id === id)).filter(Boolean);
+    return `<section class="band ${i%2?'g-paper':'g-white'}" id="${ind.slug}" aria-labelledby="ind-${ind.slug}">
+      <div class="wrap">
+        <div class="ind-block">
+          <div class="pic" data-rise><img src="${ind.img}" alt="${U.esc(ind.en)}" loading="lazy" style="object-position:${ind.pos||'center'}" width="1200" height="900"></div>
+          <div data-rise><h2 class="cap" id="ind-${ind.slug}">${bi(ind.en,ind.zh)}</h2><p>${bi(ind.desc_en,ind.desc_zh)}</p></div>
         </div>
-      </section>`;
+        <div class="plist">${prods.map(U.productRow).join('')}</div>
+      </div>
+    </section>`;
   }).join('');
-
-  // re-run reveal/observers on freshly injected nodes
-  if(U.reobserve) U.reobserve();
-
-  // deep-link: ?ind=<slug>
-  const params = new URLSearchParams(location.search);
-  const slug = params.get('ind');
-  if(slug){
-    const el = document.getElementById(slug);
-    if(el) setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 240);
-  }
+  const slug = new URLSearchParams(location.search).get('ind');
+  if(slug){ const el=document.getElementById(slug); if(el) setTimeout(()=>el.scrollIntoView({behavior:U.reduced?'auto':'smooth',block:'start'}),240); }
 };
 </script>
 <script src="assets/js/components.js"></script>

@@ -273,7 +273,7 @@ window.DX = {
       en: "Foundry Coating", zh: "铸造涂料",
       blurb_en: "Refractory foundry coatings for sand moulds and cores. They improve as-cast surface finish and resist metal penetration and burn-on, available in water- and alcohol-based formulations tuned to your alloy.",
       blurb_zh: "用于砂型与砂芯的耐火铸造涂料，改善铸态表面光洁度、抵抗金属渗透与粘砂，提供水基与醇基配方，可按合金定制。",
-      img: "assets/img/products/coating.jpg",
+      img: "assets/img/products/coating.jpg", mark: "涂料",
       gallery: ["assets/img/products/coating.jpg"],
       specs: [
         { en: "Type", zh: "类型", v: "Refractory foundry coating" },
@@ -290,7 +290,7 @@ window.DX = {
       en: "Sand-Core Repair Paste", zh: "砂芯修补补膏",
       blurb_en: "Ready-to-use refractory paste for repairing damaged sand cores and moulds. It restores broken edges and fills defects, air- or oven-drying to a firm, castable surface that reduces scrap.",
       blurb_zh: "即用型耐火补膏，用于修补破损砂芯与砂型。可修复缺边、填补缺陷，风干或烘干后形成坚固可浇注表面，降低废品。",
-      img: "assets/img/products/paste.jpg",
+      img: "assets/img/products/paste.jpg", mark: "补膏",
       gallery: ["assets/img/products/paste.jpg"],
       specs: [
         { en: "Type", zh: "类型", v: "Refractory repair paste" },

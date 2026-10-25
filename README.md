@@ -3,7 +3,7 @@
 A modern, bilingual (English / 中文) marketing site for **Suzhou Dexin Advanced Ceramics Co., Ltd.**
 Built as static HTML/CSS/JS — no build step, hosts anywhere.
 
-Design direction: **Premium Hybrid** — cinematic factory-video hero → clean light body → dark "inside our factory" band. Theme: navy + blue + white, matching the company logo.
+Design direction (Oct 2026 redesign): **Production rail**. The home page opens on one film-strip rail of square frames that plays the whole making of a filter, from raw materials and the coating line through the 1,600 °C shuttle kilns, the lab and the cartons to shipment and the customer's pour, using Dexin's own photos and factory video. The visitor can also drag it or step through it. The square filter tile is the one motif (frames, photo masks, buttons, bullets, the block-built footer wordmark). Theme: navy + white with blue only on actions, square corners, one typeface (Archivo, condensed for headings).
 
 ## Run it locally
 
@@ -17,7 +17,7 @@ python3 -m http.server 8137
 
 | Page | File | Notes |
 |------|------|-------|
-| Home | `index.html` | Factory **video hero**, stat band, 3 product lines, factory band, featured products, why-Dexin, industries, real certificates, case studies, CTA |
+| Home | `index.html` | **Production rail** (auto-playing, draggable, keyboard and button controls), the three product lines as a photo-bullet catalogue, a "which filter for your metal?" picker, industries, certificate board, case studies, inline quote form |
 | Products | `products.html` | Filter by product line (Foam Filters / Insulation / Casting Auxiliaries); browse by industry |
 | Product detail | `product.html?id=44` | Full **spec table** (real values), applications, Request Quote / Sample, related products |
 | Industries | `industries.html` | Products mapped to iron, steel, non-ferrous and furnace/kiln segments |
@@ -41,7 +41,6 @@ All product names, photos, spec tables, the company profile and the certificate 
 **Still needed from the client:**
 - Real product photos for **铸造涂料 (foundry coating)** and **砂芯修补补膏 (sand-core repair paste)** — currently clean branded placeholders — plus their spec tables.
 - A photo for **铸造芯撑 (core support)** — currently a close stand-in from the company's own product photography.
-- Confirmation of the RoHS certificate scan (badge shown, no scan on file yet).
 
 ## Swap in a higher-resolution factory video
 
@@ -62,7 +61,7 @@ On-page: bilingual titles/descriptions/keywords per page, canonical URLs on **sz
 
 ## Performance in mainland China
 
-- **No Google Fonts / zero third-party render-blocking requests** — Sora/Inter are self-hosted woff2 (`assets/fonts/`), Chinese text uses system fonts (PingFang SC / Microsoft YaHei), the standard on Chinese sites.
+- **No Google Fonts / zero third-party render-blocking requests** — Archivo (variable width/weight) is self-hosted woff2 (`assets/fonts/`), Chinese text uses system fonts (PingFang SC / Microsoft YaHei), the standard on Chinese sites.
 - All photography recompressed (progressive JPEG, ≤1600 px, ~100–320 KB per image).
 - Remaining lever is hosting: GitHub Pages is slow/unreliable from mainland China. When DNS for szdexintc.com moves to a China-hosted server (with ICP filing), copy these same files to its web root — no code changes needed.
 
@@ -74,9 +73,11 @@ All text / products / specs / certs / contact details live in **`assets/js/data.
 
 ```
 index.html, products.html, product.html, industries.html, about.html, contact.html
-assets/css/style.css        ← design system (navy / blue / white)
+assets/css/style.css        ← design system (navy / white, blue for actions, square corners)
 assets/js/data.js           ← all content (bilingual)
-assets/js/components.js      ← header, footer, mega-menu, i18n, RFQ modal, cert cards, animations
+assets/js/i18n.js           ← Spanish + Arabic dictionaries (keyed on the exact English strings)
+assets/js/components.js      ← header, footer, i18n, quote modal, catalogue rows, cert board, production rail, entrances
+assets/img/process           ← production-line, packing and after-the-pour photos from Dexin's brochures (used by the rail)
 assets/img/products          ← real product photos + designed spec cards
 assets/img/site              ← factory photos, banners, /certs (certificate scans), logo emblem
 assets/video/factory.mp4     ← hero factory video
