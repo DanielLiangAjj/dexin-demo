@@ -29,7 +29,7 @@ python3 -m http.server 8137
 ## Product model (3 focused lines)
 
 1. **泡沫陶瓷过滤器 / Ceramic Foam Filters** — SiC (gray), Alumina (white), Zirconia (gold), Mullite straight-hole. Real spec tables from the company's spec sheets.
-2. **陶瓷防火隔热材料 / Ceramic Fireproof & Insulation Materials** — graded Regular (1000 °C) / High-Alumina (1300 °C) / Alumina (1500 °C) boards.
+2. **陶瓷防火隔热材料 / Ceramic Fireproof & Insulation Materials** — Refractory Ceramic Fiber Gasket (HP/HA/ZA), Vacuum-Formed Refractory Ceramic Fiber Products (STD/JHP/JHA/JZA) and Machined Parts for Molten Aluminum (7 grades, 1000–1450 °C). Names and figures follow Dexin's brochure spread and two datasheets (Oct 2026 correction); products with a `grades` field get a full datasheet table on the product page.
 3. **铸造辅材 / Casting Auxiliaries** — filter-riser feeder, core support (chaplet), foundry coating, sand-core repair paste.
 
 All product names, photos, spec tables, the company profile and the certificate scans are taken from Dexin's own brochure, spreadsheets and photography.

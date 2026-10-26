@@ -482,6 +482,20 @@ html[dir="rtl"] .folder .tab{clip-path:polygon(18px 0,100% 0,100% 100%,0 100%)}
 .spec-table th{font-weight:500;color:var(--ink-soft);width:44%;padding-inline-end:16px}
 .spec-table td{font-weight:600}
 .spec-cap{margin-top:12px;font-size:var(--fs-small);color:var(--ink-soft)}
+.grades{margin-top:clamp(48px,6vw,80px)}
+.grades h2{font-size:var(--fs-h3)}
+.grade-scroll{margin-top:16px;overflow-x:auto;overscroll-behavior-x:contain}
+.grade-table{width:100%;min-width:640px;font-size:16px;font-variant-numeric:tabular-nums;border-collapse:collapse}
+.grade-table th,.grade-table td{padding:12px 12px;border-bottom:1px solid var(--paper-2);text-align:start;vertical-align:top}
+.grade-table thead th{border-bottom:2px solid var(--navy);vertical-align:bottom}
+.grade-table thead .code{display:block;font-weight:700;font-size:18px}
+.grade-table thead .nm{display:block;font-weight:500;font-size:var(--fs-small);color:var(--ink-soft)}
+.grade-table tbody th{font-weight:500;color:var(--ink-soft);padding-inline-start:0;min-width:180px}
+.grade-table td{font-weight:600;white-space:nowrap}
+.grade-table thead th{min-width:96px}
+/* the property column stays in view while the grades scroll sideways on a phone */
+.grade-table tbody th,.grade-table thead th:first-child{position:sticky;inset-inline-start:0;z-index:1;background:var(--white)}
+@media (max-width:640px){.grade-table tbody th{min-width:136px}}
 .pd-apps{margin-top:28px}
 .pd-apps h2{font-size:var(--fs-h3)}
 .pd-apps ul{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin-top:12px}

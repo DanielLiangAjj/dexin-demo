@@ -58,8 +58,8 @@ window.DX = {
       slug: "insulation",
       en: "Ceramic Fireproof & Insulation Materials", zh: "陶瓷防火隔热材料",
       tag_en: "Energy-saving heat protection", tag_zh: "节能防火隔热",
-      desc_en: "Refractory insulation boards and shapes graded from 1000 °C to 1500 °C for furnace linings, molten-metal handling and high-temperature protection.",
-      desc_zh: "1000℃至1500℃分级的耐火隔热板材与制品，用于炉衬、金属液输送与高温防护。",
+      desc_en: "Refractory ceramic fiber gaskets, vacuum-formed ceramic fiber products and machined parts for molten aluminium, rated from 1000 °C to 1450 °C.",
+      desc_zh: "耐火陶瓷纤维垫片、真空成型耐火陶瓷纤维制品与铝液用机加工件，使用温度1000℃至1450℃。",
       icon: "layers"
     },
     {
@@ -166,69 +166,93 @@ window.DX = {
       apps_zh: ["大型铸铁件", "自动化浇注线", "铝与铜合金", "铁合金铸造"]
     },
 
-    /* ===== Ceramic fireproof & insulation materials ===== */
+    /* ===== Ceramic fireproof & insulation materials =====
+       Names, grades and figures follow Dexin's own brochure spread and the
+       "Ceramic Fiber Processing Parts" / "Machined Parts for Molten Aluminum" datasheets. */
     {
-      id: 91, slug: "ins-std", cat: "insulation",
-      en: "Insulation Board — Regular Grade (1000 °C)", zh: "陶瓷隔热材料 · 普通型（1000℃）",
-      blurb_en: "General-purpose refractory insulation board for back-up furnace lining and thermal protection up to a 1000 °C working temperature. Low thermal conductivity keeps shell temperatures and energy consumption down.",
-      blurb_zh: "通用型耐火隔热板，用于炉衬背衬与高温防护，使用温度可达1000℃。低导热系数可降低炉壳温度与能耗。",
-      img: "assets/img/products/ins_regular.jpg",
-      gallery: ["assets/img/products/ins_regular.jpg"],
+      id: 91, slug: "fiber-gasket", cat: "insulation",
+      en: "Refractory Ceramic Fiber Gasket", zh: "耐火陶瓷纤维垫片",
+      blurb_en: "Ceramic fiber gaskets for high-temperature sealing and insulation: low thermal conductivity and heat storage, a seal that expands at temperature, high compressive strength and flexibility, strong thermal-shock resistance and low gas evolution. Easy to fit, no clean-up, RoHS compliant with no hazardous substances.",
+      blurb_zh: "低导热系数、低蓄热、高温自膨胀密封、高抗压强度、高柔韧性、高耐受热冲击、低发气量、便于安装、不用清理。材质符合ROHS指令，不含有害物质。",
+      img: "assets/img/products/fiber_gasket.jpg",
+      gallery: ["assets/img/products/fiber_gasket.jpg"],
+      temp: "1110–1430 °C",
       specs: [
-        { en: "Grade", zh: "型号", v: "Std — Regular Type" },
-        { en: "Classification temp.", zh: "分类温度", v: "1100 °C" },
-        { en: "Working temp.", zh: "使用温度", v: "1000 °C" },
-        { en: "Bulk density", zh: "体积密度", v: "250 – 350 kg/m³ (±15%)" },
-        { en: "Thermal conductivity", zh: "导热系数", v: "0.18 W/m·K @ 1000 °C" },
-        { en: "Al₂O₃", zh: "Al₂O₃", v: "45 %" },
-        { en: "SiO₂", zh: "SiO₂", v: "53 %" },
-        { en: "Fe₂O₃", zh: "Fe₂O₃", v: "≤ 1.20 %" },
-        { en: "Board sizes", zh: "板材规格", v: "1200×1000 / 900×600 / 600×400 mm · t 10–50 mm" }
+        { en: "Types", zh: "产品品种", v: "HP · HA · ZA" },
+        { en: "Working temp.", zh: "使用温度", v: "HP ≥ 1110 °C · HA ≥ 1350 °C · ZA ≥ 1430 °C" },
+        { en: "RoHS", zh: "RoHS", v: { en: "Compliant, no hazardous substances", zh: "符合ROHS指令，不含有害物质" } },
+        { en: "Shapes", zh: "形状", v: { en: "Rings, flanged gaskets and discs, cut to drawing", zh: "环形、法兰垫片、圆片，可按图纸加工" } }
       ],
-      apps_en: ["Furnace back-up lining", "Kiln insulation", "Heat-treatment equipment", "High-temperature gasketing"],
-      apps_zh: ["炉衬背衬隔热", "窑炉保温", "热处理设备", "高温密封垫"]
+      apps_en: ["High-temperature expansion seals", "Heat and vibration insulation of hot parts", "Flame-retardant electrical insulation", "Catalytic-converter sound and heat insulation", "Sealing foundry pouring cups", "Any high-temperature seal"],
+      apps_zh: ["高温膨胀密封", "高温部件隔热减振", "电气材料阻燃绝缘隔热", "三元催化器消音隔热", "铸造浇注口密封", "需高温密封的场合"]
     },
     {
-      id: 92, slug: "ins-ha", cat: "insulation",
-      en: "Insulation Board — High-Alumina Grade (1300 °C)", zh: "陶瓷隔热材料 · 高铝型（1300℃）",
-      blurb_en: "Higher-alumina insulation board for more demanding thermal duty around a 1300 °C working temperature, with lower iron content and good heat-line stability for furnace and kiln construction.",
-      blurb_zh: "高铝含量隔热板，适用于约1300℃更高温工况，铁含量更低、加热线收缩稳定，适合炉窑砌筑。",
-      img: "assets/img/products/ins_highalu.jpg",
-      gallery: ["assets/img/products/ins_highalu.jpg"],
+      id: 92, slug: "fiber-vacuum", cat: "insulation",
+      en: "Vacuum-Formed Refractory Ceramic Fiber Products", zh: "真空成型耐火陶瓷纤维制品",
+      blurb_en: "Ceramic fiber parts vacuum-formed to complex shapes, such as the stoppers and pouring tubes used in aluminium casting. Light, with low heat storage and good insulation, high temperature resistance and good thermal-shock resistance, at a low cost in use.",
+      blurb_zh: "可制成各种复杂形状，如铸铝行业用的陶瓷纤维堵头、浇管等。重量轻、低蓄热保温性能好、耐温度高、抗热振性好，使用成本低。",
+      img: "assets/img/products/fiber_vacuum.jpg",
+      gallery: ["assets/img/products/fiber_vacuum.jpg", "assets/img/products/fiber_vacuum_yellow.jpg"],
+      temp: "1000–1350 °C",
       specs: [
-        { en: "Grade", zh: "型号", v: "Ha — High-Alumina Type" },
-        { en: "Classification temp.", zh: "分类温度", v: "1350 °C" },
-        { en: "Working temp.", zh: "使用温度", v: "1300 °C" },
-        { en: "Bulk density", zh: "体积密度", v: "300 – 350 kg/m³ (±15%)" },
-        { en: "Thermal conductivity", zh: "导热系数", v: "0.20 W/m·K @ 1200 °C" },
-        { en: "Al₂O₃", zh: "Al₂O₃", v: "54 %" },
-        { en: "SiO₂", zh: "SiO₂", v: "45 %" },
-        { en: "Fe₂O₃", zh: "Fe₂O₃", v: "≤ 0.20 %" },
-        { en: "Board sizes", zh: "板材规格", v: "1200×1000 / 900×600 / 600×400 mm · t 10–50 mm" }
+        { en: "Types", zh: "产品品种", v: "STD · JHP · JHA · JZA" },
+        { en: "Working temp.", zh: "使用温度", v: "1000 – 1350 °C" },
+        { en: "Bulk density", zh: "体积密度", v: "200 – 400 kg/m³ (±15%)" },
+        { en: "Sizes", zh: "规格", v: { en: "Custom sizes for large orders", zh: "大批量可定制尺寸" } }
       ],
-      apps_en: ["Furnace hot-face lining", "Kiln & heater insulation", "Molten-metal handling", "Thermal barriers"],
-      apps_zh: ["炉膛热面衬里", "窑炉与加热器保温", "金属液输送", "隔热屏障"]
+      grades: {
+        title_en: "Ceramic fiber processing parts", title_zh: "陶瓷纤维制品性能",
+        cols: ["STD", "JHP", "JHA", "JZA"],
+        names_en: ["Regular", "High purity", "High alumina", "Zirconium-containing"],
+        names_zh: ["普通型", "高纯型", "高铝型", "含锆型"],
+        rows: [
+          { en: "Classification temp. (°C)", zh: "分类温度（℃）", v: ["1100", "1260", "1350", "1400"] },
+          { en: "Working temp. (°C)", zh: "使用温度（℃）", v: ["1000", "1100", "1200", "1350"] },
+          { en: "Bulk density (kg/m³, ±15%)", zh: "体积密度（kg/m³，±15%）", v: ["200–400", "200–400", "200–400", "200–400"] },
+          { en: "Heating line shrinkage, 24 h (%)", zh: "加热线收缩，24 h（%）", v: ["≤ 4 (1000 °C)", "≤ 4 (1260 °C)", "≤ 4 (1350 °C)", "≤ 4 (1400 °C)"] },
+          { en: "Al₂O₃ (%)", zh: "Al₂O₃（%）", v: ["45", "≥ 55", "54", "45"] },
+          { en: "SiO₂ (%)", zh: "SiO₂（%）", v: ["53", "40–45", "45", "38"] },
+          { en: "ZrO₂ (%)", zh: "ZrO₂（%）", v: ["–", "–", "–", "15"] },
+          { en: "Fe₂O₃ (%)", zh: "Fe₂O₃（%）", v: ["≤ 1.20", "≤ 0.30", "≤ 0.20", "≤ 0.20"] },
+          { en: "K₂O + Na₂O (%)", zh: "K₂O + Na₂O（%）", v: ["≤ 0.5", "≤ 0.25", "≤ 0.20", "≤ 0.20"] }
+        ]
+      },
+      apps_en: ["Burner parts for petrochemical cracking furnaces", "Peep-hole parts for industrial kilns", "Riser-sleeve parts for ferrous and non-ferrous metallurgy", "Insulated fittings for heat pipelines", "Stoppers, launders and immersion tubes for the aluminium industry", "Complex insulating shapes"],
+      apps_zh: ["石油化工裂变炉用烧咀组件", "各种工业窑炉中的观察孔组件", "有色、黑色冶金行业用的冒口套组件", "热力管道绝热保温管件", "铝工业用的塞头、铝水槽和浸入管", "绝热保温工程用的各种复杂几何形状套件"]
     },
     {
-      id: 93, slug: "ins-alo", cat: "insulation",
-      en: "Insulation Board — Alumina Grade (1500 °C)", zh: "陶瓷隔热材料 · 氧化铝型（1500℃）",
-      blurb_en: "High-purity polycrystalline-alumina insulation board for the most severe thermal duty, with a working temperature to about 1500 °C and very low thermal conductivity for high-efficiency, energy-saving linings.",
-      blurb_zh: "高纯多晶氧化铝隔热板，适用于最严苛的高温工况，使用温度可达约1500℃，导热系数极低，实现高效节能炉衬。",
-      img: "assets/img/products/ins_alumina.jpg",
-      gallery: ["assets/img/products/ins_alumina.jpg"],
+      id: 93, slug: "fiber-machined", cat: "insulation",
+      en: "Machined Parts for Molten Aluminum", zh: "铝液用陶瓷纤维机加工件",
+      blurb_en: "Ceramic fiber boards and parts machined from them for molten-aluminium service, in seven grades from the regular Std type (1000 °C working temperature) to polycrystalline alumina (1450 °C). Boards up to 1200 × 1000 mm, 10–50 mm thick.",
+      blurb_zh: "用于铝液工况的陶瓷纤维板及其机加工件，共七个型号，从普通型Std（使用温度1000℃）到多晶氧化铝型（1450℃）。板材最大1200×1000 mm，厚度10–50 mm。",
+      img: "assets/img/products/fiber_machined.jpg",
+      gallery: ["assets/img/products/fiber_machined.jpg"],
+      temp: "1000–1450 °C",
       specs: [
-        { en: "Grade", zh: "型号", v: "Polycrystalline Alumina" },
-        { en: "Classification temp.", zh: "分类温度", v: "1800 °C" },
-        { en: "Working temp.", zh: "使用温度", v: "≈ 1500 °C" },
-        { en: "Bulk density", zh: "体积密度", v: "300 – 350 kg/m³ (±15%)" },
-        { en: "Thermal conductivity", zh: "导热系数", v: "0.15 W/m·K @ 1300 °C" },
-        { en: "Al₂O₃", zh: "Al₂O₃", v: "78 – 92 %" },
-        { en: "SiO₂", zh: "SiO₂", v: "7 – 21 %" },
-        { en: "Fe₂O₃", zh: "Fe₂O₃", v: "Trace" },
+        { en: "Types", zh: "产品品种", v: { en: "Std · Hp · Ha · St · Za-1 · Za-2 · Polycrystalline alumina", zh: "Std · Hp · Ha · St · Za-1 · Za-2 · 多晶氧化铝" } },
+        { en: "Working temp.", zh: "使用温度", v: "1000 – 1450 °C" },
+        { en: "Colour", zh: "颜色", v: { en: "White", zh: "白色" } },
         { en: "Board sizes", zh: "板材规格", v: "1200×1000 / 900×600 / 600×400 mm · t 10–50 mm" }
       ],
-      apps_en: ["High-temperature furnaces", "Sintering & firing kilns", "Energy-saving linings", "Aerospace & lab furnaces"],
-      apps_zh: ["高温炉窑", "烧结与烧成窑", "节能炉衬", "航天与实验炉"]
+      grades: {
+        title_en: "Grades", title_zh: "型号性能",
+        cols: ["Std", "Hp", "Ha", "St", "Za-1", "Za-2", { en: "Polycrystalline alumina", zh: "多晶氧化铝" }],
+        names_en: ["Regular", "High purity", "High alumina", "Microcrystal", "Zirconium-containing", "Mixed", "Mixed"],
+        names_zh: ["普通型", "高纯型", "高铝型", "微晶型", "含锆型", "混合型", "混合型"],
+        rows: [
+          { en: "Classification temp. (°C)", zh: "分类温度（℃）", v: ["1100", "1260", "1350", "1400", "1400", "1400", "1800"] },
+          { en: "Working temp. (°C)", zh: "使用温度（℃）", v: ["1000", "1100", "1200", "1250", "1300", "1350", "1450"] },
+          { en: "Bulk density (kg/m³, ±15%)", zh: "体积密度（kg/m³，±15%）", v: ["250–350", "250–350", "300–350", "300–350", "300–350", "300–350", "300–350"] },
+          { en: "Heating line shrinkage, 24 h (%)", zh: "加热线收缩，24 h（%）", v: ["≤ 4 (1150 °C)", "≤ 4 (1260 °C)", "≤ 4 (1350 °C)", "≤ 4 (1350 °C)", "≤ 4 (1350 °C)", "≤ 4 (1400 °C)", "≤ 4 (1400 °C)"] },
+          { en: "Thermal conductivity (W/m·K)", zh: "导热系数（W/m·K）", v: ["0.18 (1000 °C)", "0.19 (1100 °C)", "0.20 (1200 °C)", "0.20 (1200 °C)", "0.20 (1200 °C)", "0.22 (1200 °C)", "0.15 (1300 °C)"] },
+          { en: "Al₂O₃ (%)", zh: "Al₂O₃（%）", v: ["45", "47", "54", "54", "≥ 38", "≥ 40", "78–92"] },
+          { en: "SiO₂ (%)", zh: "SiO₂（%）", v: ["53", "52", "45", "45", "51", "42", "7–21"] },
+          { en: "ZrO₂ (%)", zh: "ZrO₂（%）", v: ["–", "–", "–", "–", "2–10", "11–18", "–"] },
+          { en: "Fe₂O₃ (%)", zh: "Fe₂O₃（%）", v: ["≤ 1.20", "≤ 0.30", "≤ 0.20", "≤ 0.20", "≤ 0.20", "≤ 0.1", "Trace"] }
+        ]
+      },
+      apps_en: ["Molten-aluminium handling", "Aluminium foundries"],
+      apps_zh: ["铝液输送与处理", "铸铝行业"]
     },
 
     /* ===== Casting auxiliary materials ===== */
@@ -330,8 +354,8 @@ window.DX = {
     {
       slug: "thermal", en: "Furnaces, Kilns & Heat Treatment", zh: "工业炉窑与热处理", icon: "furnace",
       img: "assets/img/site/factory_kiln.jpg",
-      desc_en: "Graded ceramic insulation boards from 1000 °C to 1500 °C for energy-saving furnace and kiln linings.",
-      desc_zh: "1000℃至1500℃分级陶瓷隔热板，用于节能炉窑衬里。",
+      desc_en: "Ceramic fiber gaskets, vacuum-formed fiber parts and boards rated 1000 °C to 1450 °C for furnace and kiln insulation.",
+      desc_zh: "使用温度1000℃至1450℃的陶瓷纤维垫片、真空成型纤维制品与板材，用于工业炉窑隔热保温。",
       pids: [91, 92, 93]
     }
   ],
@@ -364,7 +388,7 @@ window.DX = {
       en_t: "Energy savings on a heat-treatment furnace", zh_t: "热处理炉节能改造",
       en: "Re-lining a heat-treatment furnace with graded ceramic insulation boards lowered shell temperature and measurably reduced gas consumption.",
       zh: "采用分级陶瓷隔热板对热处理炉重新做衬里后，炉壳温度下降，燃气消耗明显降低。",
-      pid: 91, img: "assets/img/site/factory_kiln.jpg"
+      pid: 93, img: "assets/img/site/factory_kiln.jpg"
     }
   ]
 };

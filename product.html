@@ -93,7 +93,14 @@ window.DXPAGE=function(){
     <div class="window"><h2 class="h3">${bi(cat.en||'',cat.zh||'')}</h2><p>${bi(cat.tag_en||'',cat.tag_zh||'')}</p></div></div>`;
   const gal=(p.gallery&&p.gallery.length?p.gallery:[p.img]);
   const thumbs=gal.length>1 ? `<div class="pd-thumbs">${gal.map((g,i)=>`<button type="button" class="${i===0?'active':''}" data-src="${g}" aria-label="Photo ${i+1}" aria-pressed="${i===0}"><img src="${g}" alt="" loading="lazy" width="160" height="160"></button>`).join('')}</div>` : '';
-  const specRows=(p.specs||[]).map(s=>`<tr><th scope="row">${bi(s.en,s.zh)}</th><td>${s.v}</td></tr>`).join('');
+  const specRows=(p.specs||[]).map(s=>`<tr><th scope="row">${bi(s.en,s.zh)}</th><td>${U.val(s.v)}</td></tr>`).join('');
+  // multi-grade datasheet (one column per grade), shown full width under the product
+  const G=p.grades;
+  const gradeTable=G ? `<div class="grades"><h2 class="h3">${bi(G.title_en,G.title_zh)}</h2>
+      <div class="grade-scroll" tabindex="0" role="region" aria-label="${U.esc(G.title_en)}"><table class="grade-table">
+        <thead><tr><th scope="col"><span class="vh">${bi('Property','项目')}</span></th>${G.cols.map((c,i)=>`<th scope="col"><span class="code">${U.val(c)}</span><span class="nm">${bi(G.names_en[i],G.names_zh[i])}</span></th>`).join('')}</tr></thead>
+        <tbody>${G.rows.map(r=>`<tr><th scope="row">${bi(r.en,r.zh)}</th>${r.v.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table></div></div>` : '';
   const trApp=(L,a)=>((window.DX_I18N&&window.DX_I18N[L]&&window.DX_I18N[L][a])||a);
   const li=a=>`<li><span class="sq"></span>${a}</li>`;
   const enChips=(p.apps_en||[]).map(li).join(''), zhChips=(p.apps_zh||[]).map(li).join('');
@@ -120,7 +127,7 @@ window.DXPAGE=function(){
       </div>
       <p class="pd-certs">${D.certs.slice(0,4).map(c=>c.code).join(' · ')} — ${bi('Backed by our ISO 9001 quality system and industry credentials.','由 ISO 9001 质量体系与行业资质保障。')}</p>
     </div>
-  </div>`;
+  </div>${gradeTable}`;
   const mainImg=document.getElementById('pd-main');
   if(mainImg) pdEl.querySelectorAll('.pd-thumbs button').forEach(b=>{
     b.addEventListener('click',()=>{

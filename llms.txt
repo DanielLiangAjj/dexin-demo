@@ -24,9 +24,9 @@
   Reticulated foam and straight-hole filters in SiC (iron/copper), alumina (aluminium),
   zirconia (steel) and mullite — trap inclusions and slag for cleaner, higher-yield castings.
 - [陶瓷防火隔热材料 Fireproof & Insulation Materials](https://szdexintc.com/products.html?cat=insulation)：
-  1000–1500℃分级耐火隔热板材与制品，用于炉衬、金属液输送与高温防护。
-  Refractory insulation boards and shapes graded 1,000–1,500 °C for furnace linings,
-  molten-metal handling and high-temperature protection.
+  耐火陶瓷纤维垫片（HP/HA/ZA型）、真空成型耐火陶瓷纤维制品（STD/JHP/JHA/JZA型）与铝液用陶瓷纤维机加工件，使用温度1000–1450℃。
+  Refractory ceramic fiber gaskets (HP/HA/ZA), vacuum-formed refractory ceramic fiber
+  products (STD/JHP/JHA/JZA) and machined parts for molten aluminum, rated 1,000–1,450 °C.
 - [铸造辅材 Casting Auxiliaries](https://szdexintc.com/products.html?cat=casting)：
   冒口、芯撑、涂料与膏剂等铸造工艺辅助材料。
   Riser sleeves, core-support products, coatings and pastes for foundry processes.
@@ -35,7 +35,7 @@
 
 - 德鑫生产哪些材质的泡沫陶瓷过滤器？碳化硅（SiC）、氧化铝（Al₂O₃）、氧化锆（ZrO₂）、莫来石四种材质，另有直孔过滤器；尺寸、气孔率（PPI）与外形均可定制。
 - 不同材质过滤器分别适用于什么金属？碳化硅适用于铸铁与铜合金；氧化铝适用于铝合金；氧化锆适用于铸钢等高温合金；莫来石为经济型通用选择。
-- 德鑫的隔热材料耐温范围？陶瓷防火隔热板材按1000℃至1500℃分级，最高使用温度可达1760℃。
+- 德鑫的隔热材料耐温范围？陶瓷纤维制品按型号使用温度1000℃至1450℃（多晶氧化铝型1450℃，分类温度1800℃）；耐火陶瓷纤维垫片HP型≥1110℃、HA型≥1350℃、ZA型≥1430℃。
 - 是否支持出口与国际订单？支持。中英双语销售、国际包装与出口单证，服务全球买家。
 - 如何获取报价？发送规格（尺寸、气孔率、数量、应用）至 dexintc@163.com 或致电 0512-68182825，通常一个工作日内回复价格、交期与样品方案。
 

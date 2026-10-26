@@ -311,8 +311,9 @@
   }
 
   /* ---------- render helpers ---------- */
+  const val = v => (v && typeof v==='object') ? bi(v.en,v.zh) : v; // a spec value is plain text or {en, zh}
   const specOf = (p, keys)=>{ const s=(p.specs||[]).find(x=>keys.includes(x.en)); return s?s.v:''; };
-  const tempOf = p => specOf(p,['Max. working temp.','Working temp.']).replace(/\s*\(.*\)/,'');
+  const tempOf = p => p.temp || String(specOf(p,['Max. working temp.','Working temp.'])).replace(/\s*\(.*\)/,'');
   const pic = (p,w)=> p.mark
     ? `<span class="type-plate" role="img" aria-label="${esc(p.en)}: photo to come" data-mark="${p.mark}"><span class="pend">${bi('Photo to come','图片待更新')}</span></span>`
     : `<img src="${p.img}" alt="" width="${w}" height="${w}" loading="lazy">`;
@@ -331,9 +332,9 @@
 
   /* products / industries / related: catalogue row with key specs */
   function productRow(p){
-    const pick=['Max. working temp.','Working temp.','Pore density','Aperture','Thermal conductivity','Size range','Dimensions','Board sizes','Function','Base','Cure','Type'];
+    const pick=['Max. working temp.','Working temp.','Types','Pore density','Aperture','Thermal conductivity','Size range','Dimensions','Board sizes','Sizes','Function','Base','Cure','Type'];
     const rows=[]; (p.specs||[]).forEach(s=>{ if(pick.includes(s.en) && rows.length<3) rows.push(s); });
-    const dl=rows.map(s=>`<dt>${bi(s.en,s.zh)}</dt><dd>${s.v}</dd>`).join('');
+    const dl=rows.map(s=>`<dt>${bi(s.en,s.zh)}</dt><dd>${val(s.v)}</dd>`).join('');
     const name=esc(lang==='zh'?p.zh:p.en);
     return `<article class="prow" data-rise>
       <a class="pic" href="product.html?id=${p.id}" tabindex="-1" aria-hidden="true">${pic(p,200)}</a>
@@ -374,7 +375,7 @@
             <div class="field"><label for="q-company">${bi('Company','公司')}</label><input id="q-company" name="company" autocomplete="organization"></div>
             <div class="field"><label for="q-phone">${bi('Phone / WhatsApp','电话/微信')}</label><input id="q-phone" name="phone" type="tel" autocomplete="tel"></div>
           </div>
-          <div class="field"><label for="q-product">${bi('Product interest','意向产品')}</label><input id="q-product" name="product" data-en-ph="e.g. SiC foam filter, insulation board" data-zh-ph="例如：碳化硅泡沫过滤器、隔热板"></div>
+          <div class="field"><label for="q-product">${bi('Product interest','意向产品')}</label><input id="q-product" name="product" data-en-ph="e.g. SiC foam filter, ceramic fiber gasket" data-zh-ph="例如：碳化硅泡沫过滤器、陶瓷纤维垫片"></div>
           <div class="field"><label for="q-msg">${bi('Requirements (size, quantity, application)','需求说明（规格 / 数量 / 应用）')}</label><textarea id="q-msg" name="message" data-en-ph="e.g. SiC 50×50×22, 20 PPI, 5,000 pcs, ductile iron" data-zh-ph="例如：碳化硅 50×50×22，20 PPI，5000片，球墨铸铁"></textarea></div>
           <button type="submit" class="btn">${bi('Send Inquiry','发送询盘')}</button>
           <p class="form-note">${bi('Your inquiry goes straight to our sales team — we usually reply within one business day.','您的询盘将直达我们的销售团队——通常一个工作日内回复。')}</p>
@@ -599,7 +600,7 @@
     document.querySelectorAll('.rail').forEach(r=>{ try{ initRail(r); }catch(err){ console.error(err); } });
   }
   window.DXUI={ svg, t, bi, esc, get lang(){return lang;}, get reduced(){return reduced;}, setLang, openRFQ, submitInquiry,
-    catalogItem, productRow, productCard:productRow, certTile, certBoard, couponHTML, tempOf, icons:I, reobserve:initObservers, applyLang, bindInlineForm };
+    catalogItem, productRow, productCard:productRow, certTile, certBoard, couponHTML, tempOf, val, icons:I, reobserve:initObservers, applyLang, bindInlineForm };
 
   if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded',boot);
 })();
